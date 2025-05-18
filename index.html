@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ereditatea și Variabilitatea - Biogenius Academy</title>
+    <style>
+        :root {
+            --primary-color: #00e6c0;
+            --secondary-color: #00b3a1;
+            --background-color: #021726;
+            --dark-color: #01111b;
+            --text-color: #ffffff;
+            --sidebar-width: 250px;
+            --header-height: 60px;
+            --card-background: rgba(0, 230, 192, 0.1);
+            --card-border: rgba(0, 230, 192, 0.3);
+            --orange-neon: #FF9500;
+            --orange-dark: #FF5E3A;
+            --yellow-neon: #FFD60A;
+            --yellow-dark: #FFC107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            transition: margin-left 0.4s ease;
+        }
+
+        /* Header Styles */
+        header {
+            height: var(--header-height);
+            background-color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin-top: var(--header-height);
+            padding: 20px;
+            transition: margin-left 0.4s ease;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        .page-title {
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+            text-align: center;
+            color: var(--primary-color);
+            margin-top: 30px;
+            font-size: 2.2rem;
+        }
+
+        .page-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .content-section {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .content-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .titlu-2 {
+            padding-left: 10px;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin: 30px 0 20px 0;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            position: relative;
+            padding-bottom: 56.25%; /* Raport 16:9, poți ajusta în funcție de nevoie */
+            background-color: #ffffff; /* Fundal alb pentru container */
+            border: 2px dashed var(--primary-color);
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .image-placeholder img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Păstrează imaginea completă fără tăieri */
+            background-color: #ffffff; /* Fundal alb pentru zonele neacoperite de imagine */
+            display: block;
+        }
+
+        .poza {
+            padding: 25px 0;
+            text-align: center;
+        }
+
+        .poza-2 {
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        .home-button {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 9;
+            transition: all 0.3s ease;
+        }
+
+        .home-button:hover {
+            transform: scale(1.1);
+            background-color: var(--secondary-color);
+        }
+
+        .home-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--dark-color);
+        }
+
+        /* Brain Decoration */
+        .brain-decoration {
+            position: fixed;
+            bottom: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            opacity: 0.1;
+            z-index: -1;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300e6c0'%3E%3Cpath d='M12 2c1.9 0 3.6.8 4.8 2 1.2 1.2 2 2.9 2 4.8 0 3.2-2.2 5.8-5.2 6.6v.6c0 1.1-.9 2-2 2h-.4c-1.1 0-2-.9-2-2v-.6C6.2 14.6 4 12 4 8.8c0-1.9.8-3.6 2-4.8C7.4 2.8 9.1 2 11 2h1zm0 2c-1.3 0-2.5.5-3.4 1.4-.9.9-1.4 2.1-1.4 3.4 0 2.2 1.5 4.1 3.6 4.7.2.1.4.3.4.5v1c0 .6.4 1 1 1h.8c.6 0 1-.4 1-1v-1c0-.2.2-.4.4-.5 2.1-.6 3.6-2.5 3.6-4.7 0-1.3-.5-2.5-1.4-3.4-.9-.9-2.1-1.4-3.4-1.4h-1z'/%3E%3C/svg%3E");
+            background-size: cover;
+            background-repeat: no-repeat;
+            transform: rotate(45deg);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            body, html {
+                overflow-x: hidden;
+                width: 100%;
+                position: relative;
+            }
+            
+            .container {
+                width: 100%;
+                overflow-x: hidden;
+            }
+            
+            .content-section {
+                padding: 20px 15px;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .home-button {
+                width: 40px;
+                height: 40px;
+                top: 70px;
+                left: 10px;
+            }
+            
+            .home-icon {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .titlu-2 {
+                font-size: 1.4rem;
+                padding-left: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-section {
+                padding: 15px 10px;
+            }
+
+            .logo h1 {
+                font-size: 0.9rem;
+            }
+            
+            .main-content {
+                padding: 15px 10px;
+            }
+            
+            .page-title {
+                font-size: 1.5rem;
+                margin-top: 20px;
+            }
+        }
+
+        /* Header pentru versiunea mobilă */
+        @media (max-width: 360px) {
+            header {
+                height: 50px;
+                padding: 0 10px;
+            }
+            
+            .logo h1 {
+                font-size: 0.9rem;
+                padding-left: 35px;
+                white-space: nowrap;
+            }
+            
+            .logo svg {
+                width: 25px;
+                height: 25px;
+            }
+            
+            .home-button {
+                width: 26px;
+                height: 26px;
+                padding: 5px;
+            }
+            
+            .home-button i {
+                font-size: 0.7rem;
+            }
+            
+            .main-content {
+                margin-top: 60px;
+                padding: 8px;
+            }
+            
+            .content-section {
+                padding: 12px;
+            }
+            
+            .page-title {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+            
+            p, li {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Stiluri specifice acestei pagini */
+        .list-style {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            text-align: justify;
+            padding-left: 30px;
+        }
+
+        .list-item {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            text-align: justify;
+            margin-left: 30px;
+        }
+
+        .titlu-3 {
+            color: var(--primary-color);
+            margin: 15px 0 10px 0;
+            font-size: 1.3rem;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin: 15px 0 10px 0;
+            font-size: 1.3rem;
+        }
+        
+        ul, ol {
+            margin-left: 40px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <div class="brain-decoration"></div>
+    
+    <!-- Header -->
+    <header>
+        <div style="width: 30px;"></div>
+        <div class="logo">
+            <svg width="40" height="40" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="none" stroke="#00e6c0" stroke-width="2" />
+                <path d="M30,50 Q40,30 50,50 Q60,70 70,50" fill="none" stroke="#00e6c0" stroke-width="2" />
+                <path d="M30,40 Q50,20 70,40" fill="none" stroke="#00e6c0" stroke-width="2" />
+                <path d="M30,60 Q50,80 70,60" fill="none" stroke="#00e6c0" stroke-width="2" />
+                <path d="M45,35 Q50,30 55,35" fill="none" stroke="#00e6c0" stroke-width="2" />
+                <path d="M45,65 Q50,70 55,65" fill="none" stroke="#00e6c0" stroke-width="2" />
+            </svg>
+            <h1>BIOGENIUS ACADEMY</h1>
+        </div>
+        <div style="width: 30px;"></div>
+    </header>
+
+    <!-- Back Button -->
+    <a href="https://alexie13.github.io/genetica/#sectiunea_dorita" class="home-button">
+        <svg class="home-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+        </svg>
+    </a>
+
+    <!-- Main Content -->
+    <div class="container" id="container">
+        <div class="main-content">
+            <h1 class="page-title">Ereditatea și Variabilitatea Lumii Vii (GENETICA)</h1>
+            
+            <!-- Secțiunea Introducere -->
+            <div class="content-section">
+                <h2 class="subtitlu">Introducere</h2>
+                <p>De secole întregi, oamenii au ales selectiv anumite animale și plante pentru a le spori productivitatea. În acele vremuri, soiurile și rasele erau dezvoltate fără o înțelegere profundă a mecanismelor de transmitere a trăsăturilor de la o generație la alta, adică fără a cunoaște principiile eredității.</p>
+                
+                <p>Doar în secolul XX, prin intermediul experimentelor din domeniul geneticii, s-au descoperit și formulat regulile care guvernează acest proces.</p>
+                
+                <p><b>Genetica</b>, ramura biologiei dedicată studiului eredității și al variabilității, se ocupă de investigarea modului în care informația genetică este transmisă și modificată în cadrul organismelor.</p>
+                
+                <p><b>Ereditatea</b> se referă la capacitatea tuturor ființelor de a deține informație genetică, prin intermediul căreia se pot transfera de la părinți la urmași trăsături ce țin de aspectul exterior, funcționare fiziologică, particularități biochimice și comportament. Această informație este stocată și codificată biochimic în acizii nucleici.</p>
+                
+                <p><b>Variabilitatea</b> descrie abilitatea indivizilor de a se diferenția prin caracteristici atât moștenite, cât și dobândite, fapt ce face imposibilă existența unor copii perfect identice.</p>
+            </div>
+
+            <!-- Secțiunea Legile Mendeliene -->
+            <div class="content-section">
+                <div class="titlu-2"><b>1. Legile mendeliene ale eredității</b></div>
+                
+                <p><b>Johann Gregor Mendel</b> (1822-1884), cunoscut adesea drept <b>"fondatorul geneticii"</b>, a fost un om de știință, educator și călugăr devotat. De-a lungul vieții sale, a demonstrat o hotărâre remarcabilă, depășind obstacole dificile pentru a realiza descoperiri fundamentale în domeniul biologiei.</p>
+                
+                <p>Primele explicații privind modul de transmitere a caracterelor ereditare au fost emise de Gregor Mendel. Acesta, desfășurând o selecție atentă de-a lungul mai multor ani, a cultivat diverse varietăți de <b>mazăre</b> și a observat că anumite trăsături ale plantelor părinte se regăseau la urmași, în timp ce altele dispăreau.</p>
+                
+                <p>El s-a concentrat asupra a <b>7 caracteristici clare</b>, fiecare manifestându-se în două forme opuse: culoarea florilor (roșii sau albe), poziția acestora (axilare sau terminale), înălțimea tulpinii (înalte sau scurte), forma bobului (rotundă sau zbârcită), culoarea semințelor (galbene sau verzi), forma păstăii (lățită sau îngustă) și, totodată, culoarea păstăii (galbenă sau verde).</p>
+                
+                <p>Mazărea nu a fost aleasă întâmplător, ci datorită faptului că această specie se cultivă cu ușurință, produce un număr mare de semințe și are posibilitatea de a se reproduce atât prin autopolenizare, cât și prin încrucișare. Acești factori i-au permis lui Mendel să controleze precis procesul de polenizare și să testeze rapid ipotezele sale experimentale. Prin aplicarea tehnicii de autopolenizare pe varietățile selectate, el a reușit să creeze linii pure de mazăre, în care trăsăturile ereditare erau transmise constant din generație în generație.</p>
+              
+                <p><b>Încrucișarea</b> între indivizi care se deosebesc prin unul sau mai multe caractere se numește hibridare.</p>
+                
+                <p><b>Hibridarea</b> presupune încrucișarea dintre părinți care prezintă diferențe într-una sau mai multe perechi de trăsături. Astfel, dacă se face referire la o singură pereche distinctă, procesul se numește <b>monohibridare</b>; dacă implică două perechi, se vorbește despre <b>dihibridare</b>; iar în cazul în care sunt implicate mai multe perechi, se utilizează termenul <b>polihibridare</b>. Rezultatul obținut prin acest proces este numit <b>hibrid</b>.</p>
+                
+                <p>Mendel a observat că, în fiecare generație de plante, anumite trăsături se manifestau într-un mod previzibil. A înregistrat detalii despre aspectul fiecărei plante și a numărat câte dintre ele prezentau o anumită caracteristică. Spre surprinderea sa, toate cele șapte trăsături studiate urmau tipare similare de moștenire:</p>
+                
+                <p class="list-item">- A remarcat că o variantă a unei trăsături, cum ar fi înălțimea mare, părea să domine, ascunzând cealaltă variantă, cum ar fi înălțimea mică, în prima generație de hibrizi. A denumit varianta vizibilă <b>"dominantă"</b> și pe cea ascunsă <b>"recesivă"</b>.</p>
+                
+                <p class="list-item">- În generația următoare, după ce plantele s-au autopolenizat, varianta recesivă a reapărut într-un număr mai mic de exemplare. De regulă, raportul era de aproximativ <b>3:1</b>, adică trei plante cu trăsătura dominantă pentru fiecare plantă cu trăsătura recesivă.</p>
+                
+                <p class="list-item"><b>3:1</b>, adică trei plante cu trăsătura dominantă pentru fiecare plantă cu trăsătura recesivă.</p>
+ 
+                <div class="poza">
+                    <div class="image-placeholder"><img src="prima poza.jpeg" alt="Schema monohibridării"></div>
+                </div>
+                
+                <p>Aceste rezultate l-au condus pe Mendel la enunțarea:</p>
+                
+                <p>- <b>Legii purității gameților</b>: Gameții sunt întotdeauna puri din punct de vedere genetic, ei conțin numai unul din factorii ereditari pereche.</p>
+                
+                <p>- <b>Legii segregării independente a perechilor de caractere</b>, conform căreia fiecare pereche de factori ereditari segregă independent de alte perechi de factori ereditari.</p>
+                
+                <h3><b>Monohibridarea și principiul purității gameților</b></h3>
+                
+                <p>Gregor Mendel a pus la cale încrucișări între două varietăți de mazăre ce diferă doar printr-o singură trăsătură: Înălțimea taliei, care putea fi fie înaltă, fie scundă. În experiment, unul dintre soiuri a fost folosit ca genitor matern, după ce s-au îndepărtat staminelele din florile hermafrodite, iar celălalt soi a acționat ca genitor paternal, din care s-a recoltat polenul ce ulterior a fost transferat pe stigmatul florilor modificate. Rezultatul primei generații a fost reprezentat de <b>hibrizi heterozigoți</b>, toți manifestând exclusiv trăsătura boabelor netede la nivel fenotipic.</p>
+                
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a doua poza.jpeg" alt="Schema monohibridării"></div>
+                </div>
+                
+                <p><b>Genotipul</b> unui organism cuprinde <b>totalitatea genelor sale</b>, iar în celulele <b>somatice</b> (<b>diploide</b>, 2n) fiecare factor ereditar se găsește în dublu, comparativ cu <b>gameții</b> (<b>haploizi</b>, n) în care apare o singură dată.</p>
+                
+                <p><b>Fenotipul</b> este ansamblul <b>caracteristicilor vizibile</b> și funcționale—morfologice, fiziologice, biochimice și comportamentale—rezultatul interacțiunii dintre genotip și mediu.</p>
+                
+                <p>Trăsătura observată la hibrizii F₁, <b>talie înaltă</b>, a fost denumită <b>dominantă</b>, în timp ce trăsătura care nu se manifesta (<b>talie scundă</b>) a fost clasificată ca <b>recesivă</b>. Ulterior, prin semănarea plantelor hibride obținute în F₁ și prin autopolenizarea lor, Mendel a generat a doua generație (F₂), unde a constatat un raport fenotipic de <b>3:1</b>, adică trei plante cu <b>talie înaltă</b> pentru fiecare plantă cu <b>talie scundă</b>.</p>
+                
+                <p>Mendel a explicat acest raport prin faptul că, fiecare gamet fiind pur din punct de vedere genetic (conținând o singură alelă din fiecare pereche), plantele heterozigote (Nn) formează în mod egal două tipuri de gameți: unul cu alela dominantă (N) și unul cu alela recesivă (n). Pentru a demonstra practic acest principiu, el a efectuat experimente de <b>backcrossing</b>, adică a încrucișat hibrizii heterozigoți din F₁ cu fiecare dintre genitorii homozigoți.</p>
+                
+                <p>De exemplu, în <b>backcross-ul</b> dintre hibridul (Nn) și genitorul dominant (NN), urmașii au prezentat exclusiv trăsătura <b>taliei înalte</b>, fiind împărțiți în mod egal între homozigoți (NN) și heterozigoți (Nn). La încrucișarea unui hibrid (Nn) cu un genitor recesiv (nn), cele două tipuri de gameți produse de hibrid (N sau n) se combină cu gameții unici ai părintelui recesiv (n), rezultând astfel o distribuție echilibrată: <b>50%</b> plante heterozigote (Nn) cu <b>talie înaltă</b> și <b>50%</b> plante homozigote recesive (nn) cu <b>talie scundă</b>.</p>
+                
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a treia poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+                
+                <h3><b>Dihibridarea și Legea Segregării Independente a Trăsăturilor</b></h3>
+                
+                <p>Pentru a explora modul în care două trăsături se pot combina și separa, Mendel a realizat o experimente de dihibridare pe plantele de mazăre care diferă prin două caracteristici: forma bobului (netedă versus zbârcită) și culoarea acestuia (galbenă versus verde).</p>
+                
+                <h3><b>Generația F₁ și Obținerea F₂</b></h3>
+                
+                <p><b>1. Încrucișarea inițială:</b></p>
+                
+                <p>Mendel a început prin a încrucișa plante care diferă în mod clar prin aceste două trăsături. Rezultatul primei generații (F₁) a fost reprezentat de hibrizi heterozigoți (genotipul <b>NnGg</b>), care au prezentat exclusiv fenotipul dominant -- adică toate plantele aveau boabe netede și galbene.</p>
+                
+                <p><b>2. Autopolenizarea:</b></p>
+                
+                <p>Planta din F₁ a fost lăsată să se autopolenizeze, iar în urma acestui proces s-a obținut generația F₂. În F₂ apar 16 combinații posibile de gameți, rezultând patru fenotipuri principale, cu un raport de segregare de <b>9:3:3:1</b>. Aceasta înseamnă că, la scară largă, distribuția trăsăturilor în populația F₂ va cuprinde:</p>
+                
+                <p>- 9/16 din plante cu ambele trăsături dominante (neted și galben),</p>
+                
+                <p>- 3/16 din plante cu o combinație de trăsături mixte,</p>
+                
+                <p>- 3/16 din plante cu cealaltă combinație mixtă,</p>
+                
+                <p>- 1/16 din plante cu ambele trăsături recesive (zbârcit și verde).</p>
+                
+                <p><b>De unde provin aceste rapoarte?</b></p>
+                
+                <p>Plantele heterozigoți din F₁ (NnGg) generează patru tipuri de gameți:</p>
+                
+                <p><b>- NG</b></p>
+                
+                <p><b>- Ng</b></p>
+                
+                <p><b>- nG</b></p>
+                
+                <p><b>- ng.</b></p>
+                
+                <p>Aceasta se datorează comportamentului independent al cromozomilor în timpul meiozei. În profaza I, cromozomii omologi se asociază formând bivalenți, iar în prima anafază aceștia se separă aleatoriu către cei doi poli ai celulei. Formula generală 2^n (unde n reprezintă numărul perechilor heterozigote de cromozomi, în cazul nostru n = 2) explică apariția a 4 tipuri de gameți.</p>
+                
+                <p>Combinarea aleatorie a acestor gameți -- atât la nivel masculin, cât și feminin -- duce la cele 16 variante posibile, iar rezultatele se regăsesc la nivel fenotipic într-un raport de 9:3:3:1.</p>
+               
+                 
+                <h3><b>Segregarea independenței analizată separat</b></h3>
+                
+                <p>Pentru a arăta că fiecare trăsătură se segregă independent, putem analiza separat distribuția fiecărui caracter:</p>
+                
+                <p><b>- Forma bobului:</b></p>
+                
+                <p class="list-item"><b>Boabele netede</b> apar în combinațiile:</p>
+                <p class="list-item">- *N-G-*: 9/16</p>
+                <p class="list-item">- *N-gg*: 3/16</p>
+                <p class="list-item">Împreună, acestea reprezintă <b>12/16</b> (sau 3/4 din total).</p>
+                
+                <p class="list-item"><b>Boabele zbârcite</b> se regăsesc doar în:</p>
+                <p class="list-item">- nnG-: 3/16</p>
+                <p class="list-item">- nngg: 1/16</p>
+                <p class="list-item">Totalizând <b>4/16</b> (sau 1/4 din total).</p>
+                
+                <p>Simplificând, raportul <b>neted:zbârcit este 3:1.</b></p>
+                
+                <p><b>- Culoarea bobului:</b></p>
+                
+                <p class="list-item">• Boabele galbene se găsesc în combinațiile:</p>
+                <p class="list-item">- N-G-: 9/16</p>
+                <p class="list-item">- nnG-: 3/16</p>
+                <p class="list-item">Totalul fiind <b>12/16</b> (3/4 din total).  </p>
+
+                <p class="list-item">•	Boabele verzi apar în:</p>
+                <p class="list-item">     - N-gg: 3/16  </p>
+                <p class="list-item">- nngg:1/16</p>
+                <p class="list-item">Totalizând <b>4/16</b> (sau 1/4 din total).  </p>
+
+                <p><b>Din nou, raportul simplificat este 3:1.</b></p>
+  
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a treia.5 poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+                
+                <h3><b>Concluzie</b></h3>
+
+                <p>Legea segregării independente arată că, în generația F₂, fiecare pereche de factori ereditari (de exemplu, pentru forma bobului sau pentru culoarea bobului) se separă independent de celelalte perechi. Aceasta explică de ce fiecare trăsătură individuală urmează un raport de 3:1, iar atunci când sunt considerate două trăsături simultan, raportul combinat devine 9:3:3:1.</p>
+
+                <p>Această abordare nu doar clarifică modul în care se obțin aceste rapoarte, dar evidențiază și importanța rearanjării aleatorii a cromozomilor în timpul meiozei, fundamentul diversității genetice în cadrul populațiilor de plante.</p>
+    </div>
+                <h1 class="page-title">Abateri de la segregarea mendeliană</h1>
+
+    <div class="content-section">
+        <h2>Introducere</h2>
+        <p>Caracteristicile ereditare studiate de Mendel au fost denumite ulterior <b>gene</b>. Fiecare trăsătură a unei plante, cum ar fi înălțimea, culoarea păstăii sau culoarea florilor, este influențată de cel puțin o pereche de gene, care pot fi identice sau diferite. Sub influența mediului, structura genelor se poate modifica, ducând la apariția <b>alelelor</b>—perechi de gene ce afectează aceeași caracteristică, dar în moduri contrastante. De exemplu, forma seminței poate avea două variații: netedă sau zbârcită.</p>
+        <p>Experimentele de hibridare realizate pe alte specii au evidențiat abateri de la segregarea mendeliană de tip dominant-recesiv, conducând la raporturi distincte în procesul de separare. Aceste variații apar ca urmare a interacțiunii dintre <b>genele alele</b> și <b>cele nealele</b>.</p>
+        <h3><b>1) Semidominanța</b></h3>
+        <p><b>Semidominanța sau dominanța incompletă</b> reprezintă un tip de interacțiune între genele alele, în care fenotipul unui individ heterozigot (Aa) se manifestă ca o <b>variantă intermediară</b> între cele ale părinților homozigoți (AA și aa). Un exemplu bine cunoscut al acestui fenomen apare la planta <b>Mirabilis jalapa</b>, cunoscută și sub numele de <b>barba-împăratului</b>. Atunci când o varietate cu flori roșii (AA) este încrucișată cu una cu flori albe (aa), toate plantele din prima generație (F₁) dezvoltă flori roz, deoarece sunt heterozigote (Aa).</p>
+        <p>În generația următoare (F₂), segregarea caracterelor se desfășoară astfel: 25% dintre plante au flori roșii, 25% flori albe, iar 50% flori roz. Acest model de moștenire determină un raport fenotipic de <b>1:2:1</b>, unde indivizii heterozigoți prezintă o culoare intermediară a florilor.</p>
+         
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a patra poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+                 
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a cincea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+              
+        <p>De asemenea, acest fenomen se mai întâlneşte, în acelaşi mod, la culoarea florii de <b>Antirrhinum majus (gura leului)</b> si la Găinilie de Andaluzia (Aa-găini albastre, AA-găini negre, aa-găini albe)</p>
+        
+        <h3><b>2) Supradominanța</b></h3>
+        <p>Fenomenul supradominanței se referă la faptul că indivizii heterozigoți prezintă <b>caracteristici îmbunătățite</b> în ceea ce privește vitalitatea, viabilitatea și capacitatea de reproducere, comparativ cu cei homozigoți. Acest avantaj genetic poate fi ilustrat schematic astfel: <b>AA < Aa > aa</b>. Acest proces stă la baza <b>heterozisului</b>, fenomen prin care hibrizii din prima generație dobândesc o vigoare sporită, având aplicații extinse în diverse domenii.</p>
+        <p>Explicația acestui efect poate fi asociată cu adaptarea biochimică la factorii de mediu și la variațiile acestora. Organismele heterozigote, având atât gene dominante (A) cât și recesive (a), dispun de două sisteme enzimatice diferite, ceea ce le conferă o mai mare capacitate de ajustare la condițiile externe în schimbare. În a doua generație, raportul de segregare rămâne <b>1:2:1</b>, iar jumătate dintre indivizi manifestă <b>fenotipul heterozis</b>.</p>
+
+        <h3><b>3) Genele letale:</b></h3>
+        <p>Genele letale sunt acele variante genetice care, în formă <b>homozigotă</b>, provoacă <b>moartea organismului</b> înainte ca acesta să atingă maturitatea sexuală. Studiile realizate pe șoarecii de culoare galbenă au evidențiat că aceștia sunt mereu heterozigoți. Atunci când doi indivizi galbeni sunt încrucișați, urmașii rezultați nu sunt exclusiv galbeni, ci apar și exemplare cu alte culori. În aceste descendențe, raportul dintre șoarecii galbeni și cei cu altă nuanță este de 2:1.</p>
+        <p>Dacă simbolizăm gena asociată <b>culorii normale a blănii cu "a"</b>, iar varianta dominantă, responsabilă de <b>culoarea galbenă, cu " A^y "(y-yellow=galben)</b>, atunci prin încrucișarea a doi heterozigoți ( A^y a x A^y a ) în generația F2 rezultă combinațiile genetice:  A^y A^y ,  2 A^y a  și  aa . Indivizii cu genotipul  A^y A^y , <b>adică cei galbeni homozigoți, nu supraviețuiesc</b>, ceea ce explică segregarea descendenței în <b>raportul de 2:1</b>. Observațiile ulterioare asupra femelelor gestante au confirmat că o parte dintre embrionii galbeni mor înainte de naștere.</p>
+        <p>Fenomenul genelor letale nu este limitat la animale—în cazul porumbului și al altor specii vegetale, anumite gene aflate în stare homozigotă determină apariția <b>plantelor albinotice, lipsite de clorofilă</b> și incapabile de supraviețuire. Există și <b>forme semiletale</b>, care permit dezvoltarea unor plante cu un conținut redus de clorofilă, ceea ce afectează parțial capacitatea lor de supraviețuire.</p>
+            
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a sasea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+        
+        <h3><b>4) Codominanța</b></h3>
+        <p>Codominanța este un fenomen genetic observat în determinarea <b>grupelor sanguine</b> la oameni și alte mamifere. Acesta implică prezența mai multor alele genetice, dintre care două sau mai multe sunt dominante, iar una este recesivă, influențând expresia fenotipică a caracterului respectiv. La oameni, <b>sistemul ABO</b> este cel mai cunoscut și răspândit dintre sistemele de grup sanguin, fiind definit prin interacțiunea a trei alele genetice.</p>
+        <p>Această descoperire fundamentală în genetica umană îi aparține lui Karl Landsteiner, medic și profesor austriac, laureat al Premiului Nobel pentru medicină și fiziologie în 1930. În acest sistem, <b>două alele sunt dominante ( L^A  și  L^B )</b>, iar <b>una este recesivă ( l )</b>. Relația de dominanță între ele este  L^A = L^B > l , ceea ce influențează determinarea grupelor sanguine astfel:</p>
+        <p class="list-item">- O singură alelă dominantă, în stare homozigotă sau heterozigotă cu alela recesivă, determină <b>grupa sanguină A ( L^A L^A  sau  L^A l )</b>, respectiv <b>B ( L^B L^B  sau  L^B l )</b>.</p>
+        <p class="list-item">- <b>Două alele recesive ( ll ) determină grupa sanguină O.</b></p>
+        <p class="list-item">- Prezența <b>ambelor alele dominante ( L^A L^B ), în stare heterozigotă, definește grupa sanguină AB.</b></p>
+        <p>Această clasificare are implicații majore în medicină, în special în efectuarea transfuziilor sanguine, unde grupa O este considerată donator universal, iar grupa AB este acceptor universal. De asemenea, sistemul ABO poate contribui la stabilirea paternității și la alte aspecte genetice relevante.</p>
+        
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a sasea.5 poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+        
+        <h3><b>5) Polialelia</b></h3>
+        <p>Polialelia reprezintă un proces genetic în care un anumit caracter este influențat <b>de mai mult de două alele</b>. Acest fenomen a fost observat atât la plante, cât și la animale, contribuind la diversitatea trăsăturilor vizibile. De exemplu, la iepuri, culoarea blănii este determinată de <b>patru alele distincte</b>, organizate într-o ierarhie de dominanță gradată:  <b>C > c^(ch) > c^h > c</b> . Datorită acestui mecanism, există patru genotipuri posibile, fiecare corespunzând unui fenotip diferit.</p>
+        <p>Un exemplu similar poate fi observat la musculița de oțet, unde există o serie de gene polialele care afectează <b>cantitatea de pigment din ochii insectei</b>. Astfel, în loc de o singură culoare, apar indivizi cu ochi albi, roz, purpurii sau corai, în timp ce forma normală este caracterizată prin ochi roșu-cărămiziu. Acest tip de variație genetică joacă un rol esențial în diversitatea organismelor și în adaptarea lor la mediul înconjurător.</p>
+            
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a saptea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+        
+        <h3><b>6) Poligenia</b></h3>
+        <p>Poligenia este un proces genetic prin care un caracter fenotipic este influențat de interacțiunea <b>mai multor gene nealele</b>. Acest fenomen a fost identificat atât la plante, cât și la animale și oameni, având un rol esențial în <b>transmiterea caracterelor cantitative</b>, cum ar fi înălțimea, greutatea, producția de fructe sau semințe, precum și randamentul ouălor sau laptelui.</p>
+        <p>Un exemplu ilustrativ provine din încrucișarea soiurilor de grâu cu bob roșu și bob alb. În prima generație ( F1 ), au rezultat hibrizi cu boabe de culoare roșu deschis. În a doua generație ( F2 ), datorită segregării genetice, au apărut boabe cu nuanțe variate între roșu și alb, iar distribuția acestora a urmat un raport de aproximativ 15 boabe roșii de diverse intensități la 1 boabă albă. Aceste observații au dus la concluzia că în determinarea culorii bobului sunt implicate două perechi de gene nealele.</p>
+        
+        <h3><b>7) Epistatis</b></h3>
+        <p>Epistasis este un fenomen genetic prin care alelele unei gene influențează sau <b>maschează expresia alelelor unei alte gene</b>. Acest mecanism a fost observat la diverse specii, inclusiv la planta <b><i>Collinsia parviflora</i></b>, unde două perechi de gene contribuie la determinarea culorii florilor. Fiecare pereche conține atât alele dominante, cât și alele recesive, ceea ce duce la variații cromatice: alb (ww, MM), purpuriu (WW, mm) și albastru (Mm, Ww).</p>
+        <p>Atunci când se încrucișează indivizi homozigoți pentru culoarea albă (ww, MM) și purpurie (WW, mm), descendenții din prima generație ( F1 ) prezintă un fenotip intermediar, cu flori albastre (Mm, Ww). La încrucișarea acestor hibrizi, în a doua generație ( F2 ) apar toate variantele fenotipice într-un raport de <b>9:3:4—nouă din 16 indivizi cu flori albastre, trei cu flori purpurii și patru cu flori albe.</b></p>
+        <p>Această segregare genetică se explică prin faptul că alela <b>w are un efect epistatic asupra alelelor M și m</b>, ceea ce înseamnă că acestea se pot exprima <b>doar în prezența alelei W</b>. Fenomenul epistazei este esențial pentru înțelegerea mecanismelor de moștenire genetică și a variațiilor fenotipice întâlnite în natură.</p>
+    </div>
+
+    <h1 class="page-title">Teoria cromozomială a eredității</h1>
+
+    <div class="content-section">
+        <p>După experimentările lui Mendel și până la momentul redescoperirii principiilor eredității, numeroși cercetători au încercat să identifice locația materialului genetic. Gametii erau considerați cei mai potriviți, deoarece reprezentau singura punte între generații. Ovulul și spermatozoidul contribuie în mod egal la transmiterea informației genetice, iar deși dimensiunile lor diferă, nucleii sunt similari ca mărime, fapt care i-a plasat drept principalii candidați pentru păstrarea factorilor ereditari.</p>
+        <p>Înainte ca <b>teoria cromozomială a eredității</b> să fie formulată, cele mai detaliate observații despre nucleu se refereau la cromozomi, structuri vizibile în timpul diviziunii celulare. Comparând meioza și fecundația cu ipotezele lui Mendel, cercetătorii au identificat numeroase similitudini. Pe baza acestor observații, Sutton și Boveri au fundamentat teoria conform căreia <b>factorii ereditari se află în cromozomi</b>. În 1909, Johannsen a introdus termenul de „genă” pentru a desemna unitatea structurală și funcțională a eredității.</p>
+        <p>Între 1910 și 1920, <b>Thomas Hunt Morgan</b> a realizat experimente de încrucișare la <b>Drosophila melanogaster (musculița de oțet)</b>, formulând mai multe principii ale teoriei cromozomiale:</p>
+        <p class="list-item">a. plasarea liniară a genelor pe cromozom;  </p>
+        <p class="list-item">b. transmiterea înlănțuită a genelor situate pe același cromozom (fenomenul de <b>linkage</b>);  </p>
+        <p class="list-item">c. numărul limitat al grupelor de linkage;</p>
+        <p class="list-item">d. schimbul reciproc de segmente între cromatidele nesurori ale cromozomilor omologi (fenomenul de <b>crossing-over</b>).</p>
+        <h3><b>a)	Plasarea liniară a genelor pe cromozom</b></h3>
+        <p>Principiul organizării genelor într-o secvență liniară pe cromozomi a fost fundamentat pe observațiile realizate asupra insectei Drosophila melanogaster (musculița vinului), precum și pe alte specii. S-a constatat că numărul genelor depășește cu mult numărul perechilor de cromozomi, ceea ce implică faptul că mai multe gene trebuie să fie localizate pe <b>aceeași pereche de cromozomi</b>. Având în vedere structura fibrei de cromatină și a cromatidelor, care sunt organizate într-o formă liniară, s-a concluzionat că genele sunt plasate într-o succesiune ordonată de-a lungul cromozomului.</p>
+        <p>Studiul cromozomilor uriași de la Drosophila melanogaster, realizat atât pe indivizi normali, cât și pe diferite mutante, a evidențiat o legătură între poziționarea benzilor cromozomale și manifestarea unor trăsături specifice. De exemplu, s-a observat o corelație între forma ochiului și frecvența regiunii 16A pe cromozomul X (perechea I de cromozomi). În exemplarele cu ochi rotunzi, compuse din 780 de omatidii, regiunea 16A apare o singură dată. La mutanta bar, unde ochiul are aspect alungit, se identifică 360 de omatidii, iar regiunea 16A este prezentă în două exemplare. În cazul mutantei dublu bar, ochiul capătă forma unei fante cu doar 25 de omatidii, iar regiunea 16A apare de trei ori.</p>
+        <p><b>Cromozomii uriași, denumiți și cromozomi politeni</b>, sunt rezultatul unui proces numit politenie. Acest fenomen implică multiple diviziuni ale centromerului cromozomului, cromatidele rezultate rămânând adiacente și paralele. Toți centromerii celor patru perechi de cromozomi sunt concentrați într-o structură denumită <b>cromocentru</b>, iar acești cromozomi politeni devin vizibili în faza de interfază.</p>
+    
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a opta poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+
+        <h3><b>b)	Transmiterea înlănțuită a genelor situate pe același cromozom (fenomenul de linkage);  </b></h3>
+        <p>Cromozomii se comportă ca unități complete în timpul diviziunii celulare, ceea ce determină ca genele localizate pe același cromozom să fie moștenite împreună. Morgan și colaboratorii săi au demonstrat acest fenomen prin experimente efectuate pe <b>Drosophila melanogaster</b>. Cromozomii acesteia sunt în număr de <b>4 perechi</b>: </p>
+    
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a noua poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+                
+        <p>Această insectă este ideală pentru studiile genetice deoarece depune sute de ouă, are un <b>ciclu scurt de viață</b> (o generație se formează în aproximativ 14 zile) și se poate crește cu ușurință în laborator, în vase de sticlă pe medii simple. În plus, numărul de cromozomi somatici este redus <b>(2n = 8)</b>, fiecare cromozom fiind distinct morfologic. De asemenea, peste 500 de mutații care afectează diferite trăsături au fost identificate, iar cromozomii uriași din celulele <b>glandelor salivare</b> și din celulele tractului intestinal ale larvelor – vizibili în interfaza mitotică, cu o lungime de aproximativ 1180 μm – oferă o platformă excelentă pentru observații detaliate. Dimorfismul sexual evident între masculi și femele facilitează organizarea experimentelor de încrucișare controlată.</p>
+        <p><B>La Drosophila melanogaster</B>, notarea genelor recesive se realizează cu inițiala din denumirea caracteristicii recesive, iar alelele dominante se notează, de obicei, prin aceeași literă urmată de semnul „+”. De exemplu, <b>forma recesivă a aripilor – vestigial – este notată cu „vg”</b>, pe când varianta dominantă, responsabilă de <b>aripile lungi, se notează „vg+”</b>. În mod similar, culoarea recesivă a corpului, reprezentată de <b>negru (black), se exprimă prin „b”</b>, iar varianta dominantă, <b>culoarea gri, prin „b+”.</b></p>
+        <p>Morgan și colaboratorii săi au realizat încrucișări între indivizi normali și mutanți sau între diferite linii mutant, urmărind modul în care se moștenesc caracterele în funcție de sexul indivizilor utilizați. De exemplu, o femelă cu trăsături dominante (aripi lungi și corp gri) de genotip, de exemplu, (vg+ b+ / vg+ b+), a fost încrucișată cu un mascul mutant care prezenta trăsături recesive (vg b / vg b).</p>
+        <p>Descendenții heterozigoți din prima generație au manifestat trăsăturile dominante (aripi lungi și corp gri). Pentru a stabili dacă genele studiate se află pe aceeași pereche de cromozomi sau pe cromozomi diferiți, a fost efectuată o încrucișare de tip <b>test cross</b>. Aceasta constă în <b>retroîncrucișarea</b> indivizilor heterozigoți (de exemplu, de genotipul vg+ b+ / vg b) cu un genitor homozigot recesiv pentru trasăturile analizate (vg b / vg b).</p>
+                
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a zecea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+                          
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a unspea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+              
+         <p>Rezultatele obținute au evidențiat existența a doar două categorii fenotipice în generația următoare: 50% indivizi heterozigoți, care au prezentat trăsăturile dominante (aripi lungi și corp gri), și 50% indivizi homozigoți recesivi, cu trăsături recesive (aripi vestigiale și corp negru). Acest tipar de ereditaritate confirmă faptul că genele analizate se află pe aceeași pereche de cromozomi (în exemplul dat, a doua pereche), iar prezența cromozomului Y la masculii heterozigoți împiedică alinierea completă a cromozomilor omologi, limitând schimbul de segmente între cromatidele nesurori, fenomen esențial pentru <b>crossing-over</b>.</p>       
+        
+         <h3><b>c)	Numărul limitat al grupelor de linkage;  </b></h3>
+         <p>Observațiile asupra diviziunii celulare relevă că, în timpul acesteia, cromozomii se comportă ca unități complete, migrarea fiind organizată astfel încât cromozomii sau cromatidele lor întregi se deplasează spre polii celulei. Această modalitate de organizare conduce la transmiterea în bloc a genelor aflate pe același cromozom.</p>
+         <p>Din această perspectivă, numărul grupelor de linkage este dictat în mod direct de numărul perechilor de cromozomi dintr-o specie. De exemplu, Drosophila melanogaster, cu un set diploid de <b>2n = 8, prezintă 4 grupuri de linkage</b>; la Homo sapiens, unde <b>2n = 46, rezultă 23 de grupuri</b>; iar la Allium cepa (ceapă), cu <b>2n = 16, se identifică 8 grupuri de linkage</b>.</p>
+         <p>Această relație fundamentală între numărul cromozomilor și grupurile în care genele sunt transmise împreună a avut un impact semnificativ în domeniul geneticii clasice, permițând stabilirea hărților genetice ale diferitelor specii.</p>
+         <h3><b>d)	Schimbul reciproc de segmente între cromatidele nesurori ale cromozomilor omologi (fenomenul de crossing-over). </b></h3>
+         <p>Dacă femelele heterozigote din F, cu genotipul (vg+ b+ / vg b), sunt <b>retroîncrucișate</b> cu masculi homozigoti recesivi pentru genele studiate (vg b / vg b), descendenții din generația F se împart în patru categorii fenotipice diferite. Două dintre aceste grupe, reprezentând câte <b>41,5%</b> din total, prezintă fie trăsături complet dominante, fie trăsături complet recesive (asemănătoare genotipurilor parentale), iar celelalte două, formând câte <b>8,5%</b> din populație, afișează o combinație de un caracter dominant și unul recesiv, alternându-se reciproc.</p>
+                
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a doispea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+                           
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a treispea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+                   
+        <p>Această diversitate apare deoarece femelele heterozigote generează patru tipuri diferite de gameți. Două tipuri sunt "normale" – unul cu constituția genetică vg+ b+ și celălalt cu vg b – iar celelalte două conțin gene interschimbate, respectiv vg+ b și vg b+. Pe de altă parte, masculii homozigoți recesivi produc un singur tip de gamet, care poartă exclusiv gene recesive (vg b).</p>
+                        
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a paispea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+                    
+        <p>Procesul de <b>crossing-over</b> se produce exclusiv între <b>cromatidele nesurori ale cromozomilor omologi</b>. În profasă I a meiozei, acești cromozomi se aliniază și se ating în una sau mai multe zone, unde pot să apară ruperi în cromatidele nesurori ale fiecărui cromozom, urmate de un schimb reciproc de segmente cromatidale – adică de gene. Frecvența acestui eveniment este direct proporțională cu distanța dintre gene; cu cât genele sunt mai depărtate, cu atât este mai probabilă apariția crossing-over-ului. Acest mecanism de <b>recombinare intracromozomială</b> este esențial pentru generarea diversității genetice și stă la baza elaborării hărților cromozomale la eucariote.</p>
+        <p><b>Harta cromozomală</b> este o reprezentare schematică care ilustrează organizarea cromozomilor și a genelor din diverse grupuri de linkage, unde distanțele dintre gene sunt exprimate în procente de recombinare. </p>
+        <p>Au fost elaborate hărți genetice cromozomale pentru numeroase specii de plante și animale de interes economic, cum ar fi grâul, secărea, floarea soarelui, peștii, păsările, câinii, tauri, și, de asemenea, pentru om. Aceste hărți sunt esențiale atât pentru înțelegerea teoretică a eredității, cât și pentru aplicările practice în agricultură, medicină și creșterea animalelor.  </p>
+    </div>
+    <h1 class="page-title">Recombinarea genetică</h1>
+    <div class="content-section">
+        <p><b>Recombinarea genetică</b> reprezintă procesul prin care segmente de informație genetică, provenind din surse diferite, sunt combinate într-o singură unitate. La nivel molecular, acest proces implică transferul unei secvențe de informație de la o moleculă de acid nucleic la alta, prin schimb de fragmente între secvențe de ADN <b>omoloage</b>.</p>
+        <p>Un exemplu clasic de recombinare este crossing-over-ul, care are loc în celulele eucariote în timpul profazei I a meiozei. Acest fenomen, denumit și recombinare intracromozomială, se traduce prin schimbul de fragmente cromozomiale între cromozomii omologi.</p>
+        <h3><b>a. Recombinarea Genetică Intracromozomială</b></h3>
+        <p><b>Recombinarea intracromozomială se desfășoară în profaza I a meiozei</b> și produce gameți cu combinații genetice noi. În majoritatea speciilor, meioza se parcurge în două etape distincte:  </p>
+        <p class="list-item">- <b>Diviziunea de reducere (heterotipică)</b>, care reduce numărul de cromozomi la jumătate și generează două celule haploide;  </p>
+        <p class="list-item">- <b>Diviziunea homeotipică</b>, care urmează și rezultă în formarea a patru celule haploide.</p>
+        <p><b>Etapele schimbului de segmente cromozomiale</b> în timpul meiozei sunt următoarele:</p>
+        <p class="list-item">1. <b>Apropierea cromozomilor omologi</b>: Cromozomii, care formează perechi (omologi), se adună, iar cromatidele nesurori sunt apropiate de o nucleoproteină ce le stabilizează.</p>
+        <p class="list-item">2. <b>Formarea sinapsei</b>: Cromozomii proveniți din partea maternă și cea paternală se aliniază de-a lungul întregii lor lungimi, astfel încât centromerele și genele corespondente se aliniază perfect. Acest aranjament generează bivalenții sau tetradele cromozomiale.</p>
+        <p class="list-item">3. <b>Realizarea chiasmelor și crossing-over-ul</b>: În punctele de contact numite chiasme, cromatidele nesurori suferă rupturi și se reatașează, schimbând segmente. Astfel, o regiune de pe o cromatidă maternă se poate uni cu cea de pe cromatida paternală, rezultând în cromozomi recombinați.</p>
+        <p class="list-item">4. <b>Diversificarea cromatidelor surori</b>: După crossing-over, cromatidele surori ale unui cromozom nu mai sunt identice, reflectând noile combinații genetice.</p>
+        <p>Ulterior, când sinapsa se desface, cromozomii omologi se separă, fiecare migrând către un pol al fusului de diviziune, formând nucleele noilor celule fiice. Frecvența chiasmelor crește odată cu lungimea cromatidelor, iar analiza hibridarilor prin frecvența crossing-over-urilor permite calcularea distanțelor dintre gene și construirea hărților cromozomiale. Aceste hărți reprezintă aranjamentul genelor, bazat pe procentele de recombinare, și contribuie la diversitatea genetică a gameților, precum și la cea a descendenților.</p>
+                    
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a cinspea.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+                             
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a saispea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+
+        <h3><b>b. Recombinarea Genetică Intercromozomială</b></h3>
+        <p><b>Recombinarea genetică intercromozomială</b> rezidă în segregarea independentă și aleatorie a cromozomilor omologi în timpul <b>anafazei I a meiozei</b>. În această etapă, perechile de bivalenți se separă astfel încât <b>cromozomii migrează independent către polii opuși ai fusului de diviziune</b>. Ca urmare, <b>celulele fiice primesc combinații diferite de cromozomi</b>, proveniți de la ambii părinți.</p>
+        <p>Numărul de combinații posibile prin acest mecanism este direct proporțional cu numărul de perechi de cromozomi. Astfel, <b>formula 2^n, unde „n” reprezintă numărul perechilor de cromozomi</b>, descrie diversitatea posibilă a gameților. De exemplu, la specia umană, cu 23 de perechi de cromozomi, pot exista <b>2^23 (adică 8.388.608) combinații diferite de gameți</b>. Când acești gameți se unesc aleatoriu în timpul fertilizării, descendenții dobândesc un număr imens de genotipuri, asigurând variabilitatea genetică și unicitatea față de părinți.</p>
+    </div>
+
+    <h1 class="page-title">Ereditatea extranucleară</h1>
+    <div class="content-section">
+            <p>Experiențele de hibridare întreprinse de Mendel, Morgan și alți cercetători pe diverse specii de eucariote au evidențiat existența eredității determinate de genele localizate pe cromozomi, adică în nucleu. Cu excepția genelor situate pe cromozomii sexuali – adică a genelor sex-linkate, care se transmit la frecvențe diferite între sexe (conform detaliilor prezentate în subcapitolul „Genetica umană”) – rezultatul hibridizărilor se manifestă, în mod obișnuit, identic, indiferent de sexul genitorilor. Totuși, în anumite cazuri, natura specifică a genitorilor influențează rezultatul. De exemplu, la încrucișarea dintre <b>cal (Equus caballus)</b> și <b>asin (Equus asinus)</b>, diferența în numărul de cromozomi – calul posedând 64 de cromozomi în celulele somatice, iar asinul doar 62 – conduce la obținerea de hibrizi viabili cu număr intermediar de cromozomi <b>(2n = 63)</b>. Dacă femela este calul, încrucișarea generează <b>bardoul</b>, în timp ce dacă femela este asina, se formează <b>catârul</b>.</p>
+            <p>Rezultate similare au fost observate și în alte tipuri de încrucișări. Deși gameții ambelor sexe conțin același număr de cromozomi și, implicit, aceeași cantitate de ADN nuclear, cantitatea de citoplasmă care înconjoară nucleul este foarte diferită. Gametul masculin, de regulă, reține doar o peliculă subțire de citoplasmă, aproape lipsită de organite, pe când gametul feminin dispune de o cantitate abundentă de citoplasmă, în care se găsesc organitele celulare precum <b>mitocondriile, cloroplastele (sau proplastidele la plantele verzi), plasmidele</b> și, în anumite cazuri, <b>simbioți intracelulari</b>. Atât mitocondriile, cât și cloroplastele, la fel ca și plasmidele sau simbioții intracelulari, dețin propriul ADN care conține anumite gene. Deoarece aceste organite se găsesc în mod esențial doar în citoplasma <b>gametului feminin</b>, ele se transmit exclusiv de la mamă. Forma de ereditate care rezultă din transmiterea genelor din ADN-ul citoplasmatic este denumită ereditate citoplasmică, <b>ereditate extra-nucleară</b> sau ereditate non-mendeliană, întrucât nu se realizează segregarea conform raporturilor mendeliene clasice.</p>
+            <p>În funcție de tipul de organit care transmite genele, se disting mai multe categorii de ereditate extranucleară: plastidică, mitocondrială, plasmidică și cea prin simbioți intracelulari.</p>
+
+            <h3><b>1.	Ereditatea extranucleară plastidică:</b></h3>
+            <p>Aceasta a fost identificată inițial de către Carl Correns la specia <b>Mirabilis jalapa</b>. Correns a efectuat experimente pe plante care prezentau ramuri cu tipuri diferite de frunziș: unele cu frunze verzi, altele cu frunze mutant <b>albe sau galbene (mutanta albino sau xantha)</b> și ramuri cu frunze variegate, ce cuprindeau sectoare verzi intercalate cu sectoare mutant (albino sau xantha). În urma încrucișărilor dintre flori provenite de pe ramuri diferite, s-a constatat că atunci când genitorul feminin provenea de pe o ramură cu frunze omogene (fie verzi, fie mutant), indiferent de ramura de proveniență a polenului, semințele au dezvoltat plante ale căror frunze erau identice cu cele ale genitorului feminin. Segregarea trăsăturii s-a produs doar în cazul ramurilor variegate, rezultând în semințele hibride plante cu frunze verzi, mutant sau variegate. Explicația acestui fenomen este dată de transmiterea exclusivă a cloroplastelor prin citoplasma bogată a gametului feminin. Pe ramurile cu frunze verzi se găsesc numai cloroplaste normale, pe cele cu frunze mutante – exclusiv cloroplaste modificate, iar pe ramurile variegate se găsesc ambele tipuri. Astfel, primordiile cloroplastelor corespunzătoare se găsesc în citoplasma ovulului și se transmit descendenților. Analize ulterioare ale caracteristicilor structurale și genetice ale cloroplastelor de la plante normale și de la diferite mutante clorofiliene au evidențiat diferențe semnificative în structura acestor organite.</p>
+                  
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a saptispea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+               
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a optispea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+
+            <h3><b>2. Ereditatea extranucleară mitocondrială:</b></h3>
+            <p>Aceasta se bazează pe ADN-ul conținut în mitocondrii și a fost demonstrată la numeroase specii de organisme. De exemplu, în ciuperca <b><i>Neurospora crassa</i></b> s-a identificat o mutantă caracterizată printr-o creștere încetinită a talului, determinată de mutații ale citocromilor din mitocondrii, care intervin în ciclul respirator. Tipul cu creștere normală este desemnat ca <b>tipul sălbatic (wild)</b>, iar cel cu creștere redusă este cunoscut ca tipul <b>„poky”</b>. Studiile au arătat că rata de creștere a talului ciupercii este determinată întotdeauna de gametul matern, deoarece în citoplasma acestuia se găsesc precursori mitocondriali ce se transmit descendenților.</p>
+
+            <h3><b>3. Ereditatea extranucleară plasmidică:</b></h3>
+            <p>Această formă de ereditate se datorează prezenței plasmidelor, molecule de ADN care pot fi liniare sau circulare și care se găsesc fie independent de cromozomul bacterian, fie integrate în structura acestuia. S-a raportat recent existența plasmidelor nu doar în cromozomii bacterieni, ci și în mitocondrii și în nucleul celulelor eucariote. În bacterii, plasmidele de tip F (factori de fertilitate) sunt esențiale în procesele de para-sexualitate, contribuind astfel la inducerea variabilității genetice.</p>
+            
+            <h3><b>4. Ereditatea prin simbioți intracelulari:</b></h3>
+            <p>Pe lângă mitocondrii și cloroplaste – care își au originea din bacterii heterotrofe și, respectiv, autotrofe, ce au intrat într-o relație simbiotică cu celulele primitive și ulterior au devenit organite celulare – există numeroase cazuri de simbioți intracelulari ce se transmit exclusiv prin citoplasma gametului feminin. La <b><i>Paramecium aurelia</i></b>, ca răspuns la tratamentul cu <b>paramecină</b>, se disting două tipuri de indivizi: sensibili și rezistenți. S-a observat că celulele indivizilor rezistenți conțin particule numite <b>„kappa”</b>, implicate în sinteza de paramecină, substanță care, eliberată în mediul înconjurător, induce moartea celor sensibili aflați în vecinătate. Cercetările ulterioare au arătat că particulele kappa reprezintă, de fapt, bacterii intracelulare simbiotice, identificate ca Caedobacter teniospiralis, care posedă gene esențiale pentru sinteza paramecinei. Capacitatea acestor particule de a induce sinteza paramecinei este condiționată de prezența, în nucleul parameciului, a genei dominante K (de la „killer”, adică ucigaș), fie în stare homozigotă (KK) fie heterozigotă (Kk). Prin urmare, în cazul conjugării dintre un parameci sensibil (lipsit de particule kappa în citoplasmă și cu genotip nuclear homozigot recesiv, kk) și un parameci rezistent (care posedă particule kappa în citoplasmă și are genotipul KK sau Kk), particulele kappa pot fi transmise în citoplasma partenerului sensibil. Totuși, în absența genei dominante K în condiție favorabilă (KK sau Kk), partenerul sensibil nu va putea sintetiza paramecina. Studiile au identificat și alte exemple de ereditate determinată de simbioți intracelulari, cum ar fi particulele mu de origine bacteriană care induc moartea partenerului în încrucișările la parameci, factorii sigma (virușii cu ADN) care, prin prezența lor în citoplasma unor rase de Drosophila, afectează sensibilitatea musculaturii la concentrații crescute de dioxid de carbon, precum și particulele infecțioase lambda la Drosophila melanogaster, influențând predominanța sexului feminin în descendență.</p>
+            <p>În celulele umane, numărul de mitocondrii poate varia în general de la 2 la 10, iar în ovule poate ajunge chiar la 100.000. ADN-ul mitocondrial (ADNmt) este, de regulă, mai puțin constant decât ADN-ul cloroplastic (ADNcp), prezentând deficiențe în contracararea efectelor unor factori de mediu; în celulele canceroase s-au identificat anomalii structurale și funcționale ale ADNmt. Analiza genomurilor mitocondrial și cloroplastic a condus la concluzia că aceste organite își au originea în organisme procariote care au stabilit simbioze cu celulele gazdă eucariote, întrucât în celulele procariote nu există mitocondrii sau cloroplaste. Transmiterea acestor organite se realizează, de asemenea, nemendelian, exclusiv pe linie maternă. Acest tip particular de ereditate a fost intuit încă din anul 1902 de C. Correns, care a studiat modul de transmitere descendentă a varietății cu frunze pătate (pete albe) la specia Mirabilis jalapa (barba-împăratului). Experimentele sale au demonstrat că doar descendenții obținuți prin fecundarea unui ovul provenit de la plante cu frunze pătate moștenesc această trăsătură, datorită faptului că organitele cloroplaste se transmit împreună cu citoplasma oosferei, pe când pelicula fină de citoplasmă a nucleelor spermatici nu conține aceste structuri.</p>
+            
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a nouaspea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+
+            <p>Ereditatea extranucleară a fost verificată și în cazul animalelor. La speciile de gasteropode acvatice din genul Limnaea, direcția de răsucire a cochiliei (dextrală sau senestrală) este determinată de genele mitocondriale materne.</p>
+            <p>Cunoașterea modului de transmitere a eredității extranucleare are implicații practice considerabile. De exemplu, sterilitatea masculină la plante (androsterilitatea) reprezintă o afecțiune transmisă pe cale maternă, rezultat al interacțiunilor complexe dintre ADN-ul mitocondrial, ADN-ul extra-nuclear și ADN-ul nuclear, manifestându-se prin producerea de polen nefuncțional. Această anomalie este exploatată în agricultură pentru obținerea hibrizilor care prezintă fenomenul de heterozis, ce se manifestă în prima generație după încrucișarea între organisme omozigote. În acest context, prevenirea autopolenizării reprezintă o problemă majoră în obținerea heterozisului, iar sterilitatea masculină oferă o soluție eficientă pentru această provocare.</p>
+            
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a douazecea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+            
+    </div>
+
+    <h1 class="page-title">Determinismul cromozomal al sexelor</h1>
+
+    <div class="content-section">
+        <h3><b>Relația dintre caracterele fenotipice și structura cromozomilor</b></h3>
+        <p>Relația strânsă dintre trăsăturile observabile (fenotipul) și structura cromozomială este fundamentală în determinarea sexului la organisme. Morgan, studiind musculița de oțet (Drosophila melanogaster), a demonstrat că diferențele fenotipice între masculi și femele corespund variațiilor de formă și mărime ale unei anumite perechi de cromozomi (conform figurii 3.13). Analiza unui număr mare de specimene a relevat că, deși toate celulele conțin perechi omoloage de cromozomi, o singură pereche prezintă diferențe între sexe. La Drosophila, setul diploid constă din 8 cromozomi organizați în 4 perechi (I, II, III și IV). În timp ce perechile II, III și IV sunt identice la ambele sexe, perechea I diferă: la femele ambii cromozomi sunt în formă de bastonaș, iar la masculi unul menține forma de bastonaș, iar celălalt apare sub forma unui bastonaș frânt. Această diferență specifică este întotdeauna asociată cu sexul masculin și a dus la denumirea acestor cromozomi drept „cromozomi ai sexului” sau heterozomi, iar restul sunt numiți autozomi.</p>
+        <p>Identificarea acestor diferențe cromozomiale a condus la elucidarea mecanismului principal de determinare a sexelor – determinismul cromozomal. În organismele mai evoluate, genele care reglează sexualitatea se găsesc organizate pe cromozomi separați, iar acest mecanism permite menținerea unui raport de 1:1 între masculi și femele. În funcție de natura diferențelor între cromozomii sexuali, acestea pot fi de ordin morfologic (forme distincte între sexe) sau numeric (număr diferit de cromozomi la masculin și feminin).</p>
+        
+        <h3><b>Determinismul cromozomal al sexului la specii cu femele homogametice și masculi heterogametici</b></h3>
+        <p class="list-item">1.	<b>Tipul Drosophila – diferențe morfologice</b> În acest model, femela este homogametică și posedă două cromozomi sexuali identici (XX), iar masculul este heterogametic (XY). Cromozomul Y este, în general, mai mic și heterocromatic, conținând un număr redus de gene. La Drosophila melanogaster – model valabil nu doar pentru multe specii de insecte și nevertebrate, ci și pentru toate mamiferele –, femela produce un singur tip de gamet, conținând jumătate din autozomi plus un cromozom X. În schimb, masculul generează două tipuri de gameti, în proporții egale: unul cu setul de autozomi și un cromozom X și altul cu setul de autozomi și cromozomul Y. Astfel, fecundația câștigă un zigot XX (femelă) atunci când un gamet X masculin se unimă cu cel X feminin, iar un zigot XY (mascul) când un gamet Y se combină cu cel X femel. Această producție egală de joculețe asigură raportul de 1:1 între sexe. Un exemplu similar se regăsește și la plantele dioice, cum ar fi cânepa: populațiile de cânepă de vară, reprezentate de indivizi masculi cu cromozomi XY, se maturizează mai timpuriu, pe când cele de toamnă, formate exclusiv din femele cu cromozomi XX, se dezvoltă ulterior.</p>
+        
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a douazeci si doua poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+
+        <p class="list-item"><b>2.	Tipul Protenor – diferențe numerice</b> La unele specii, diferența sexuală nu constă în modificări morfologice ale cromozomilor, ci în numărul lor. Printr-un proces de heterocromatinizare intensă, cromozomul Y poate suferi o reducere atât de accentuată a dimensiunilor încât dispare practocal. În aceste cazuri, femelele sunt XX, iar masculii apar ca XO („O” indicând absența cromozomului Y). La speciile de lăcuste, precum Protenor bleifragei, și în alte nevertebrate, masculii formează în mod egal două tipuri de gameti: unul ce conține cromozomul X și altul lipsit de acesta (notat O), iar femelele, care formează un singur tip de gamet cu setul de autozomi și un cromozom X, se fecundă astfel încât zigotul rezultant să fie XX (femelă) sau XO (mascul). Această distribuție egală din punct de vedere proporțional asigură un raport de sex de 1:1.</p>
+        
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a douazeci si treia poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+
+        <h3><b>Determinismul cromozomal al sexului la specii cu femele heterogametice și masculi homogametici</b></h3>
+        <p class="list-item">1.<b>	Tipul Abraxas – diferențe morfologice</b> La unele insecte, nevertebrate și în mod constant la păsări, femela este heterogametică, având cromozomi sexuali diferiți (notați ZW sau, alternativ, XY), iar masculul este homogametic cu doi cromozomi identici (ZZ sau XX). Femelele produc în mod egal două tipuri de gameti, fiecare având jumătate din autozomi adăugați la un cromozom sexual – fie Z, fie W. Deoarece cromozomul W este de regulă mai mic și conține mai puține gene datorită heterocromatizării, el se regăsește numai la femele. Fecundația astfel rezultă într-un raport de 50% masculi (ZZ) și 50% femele (ZW).</p>
+
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a douazeci si patra poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+
+        <p class="list-item">2.	<b>Tipul Fluture – diferențe numerice</b> Acest tip, mai rar întâlnit, apare la anumite specii de fluturi din Australia și reprezintă o situație inversă față de tipul Protenor. La femele, o heterocromatinizare accentuată a cromozomului W determină piromic micșorare sau chiar dispariția completă a acestuia, astfel încât acestea devin ZO, în timp ce masculii rămân cu setul complet ZZ. La masculi, se formează un singur tip de gamet ce conține jumătate din autozomi și un cromozom Z. Femelele, însă, generează două tipuri de gameti: unul care conține jumătate din autozomi și cromozomul Z și altul care prezintă doar jumătate din autozomi (notat O). Aceste procese de fecundație duc la obținerea unui raport egal de 50% masculi (ZZ) și 50% femele (ZO).</p>
+    
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a douazeci si cincea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+
+        <p>Pe lângă modelele Drosophila și Abraxas, natura prezintă și alte sisteme cromozomiale pentru determinarea sexului, deși acestea apar mai rar. </p>
+        <p class="list-item">•	De exemplu, la rozătorul <b><i>Mus minutoides minutoides</i></b> se observă un mecanism în care, prin duplicarea și translocarea heterozomilor, sexul este determinat de mai mult de o pereche de cromozomi. În acest caz, femelele prezintă configurația X₁X₁X₂X₂, iar masculii au componența X₁X₂Y. </p>
+        <p class="list-item">•	Un alt exemplu este cel întâlnit la albina <b><i>(Apis mellifera)</i></b>, unde determinarea sexuală se bazează pe diferența de ploidie: femelele, care se dezvoltă din ovule fecundate, sunt diploide (2n), în timp ce masculii provin din ovule nefecundate și sunt haploide.</p>
+    </div>
+
+    <h1 class="page-title">Influența mediului asupra eredității</h1>
+
+    <div class="content-section">
+        <p>Efectul factorilor de mediu asupra materialului genetic se manifestă prin apariția <b>mutațiilor</b>. O mutație reprezintă o modificare neprogramată a structurii materialului genetic, care nu rezultă din procese de recombinare. La nivelul ADN-ului, aceasta constă în schimbări ale secvenței nucleotidelor, modificări care pot genera noi proprietăți la nivelul celulei. În funcție de amploarea modificărilor suferite, mutațiile se împart în trei categorii principale: mutații genice, cromozomiale și genomice.</p>
+        <p class="list-item">•	<b>Mutațiile genice</b> implică modificări ale unui număr redus de nucleotide.</p>   
+        <p class="list-item">•	<b>Mutațiile cromozomiale</b> presupun rearanjări ale unor segmente din cromozomi.</p> 
+        <p class="list-item">•	<b>Mutațiile genomice</b> alterează numărul cromozomilor din celule (conform figurii 3.15).</p>
+        <p>Impactul mutațiilor asupra cromozomilor și genelor este foarte variat. La om, în multe cazuri, anumite mutații pot fi letale, împiedicând dezvoltarea normală a organismului. De exemplu, aproximativ 20% dintre sarcini se încheie spontan înainte de 12 săptămâni, iar din acestea, 50% prezintă anomalii genetice. Mutațiile la nivel genei pot genera un număr mare de alele pentru același locus cromosomic, ceea ce conduce la creșterea heterozigotiei și, implicit, la diversificarea fondului genetic al unei populații. Pe de altă parte, unele tipuri de mutații cromozomiale pot modifica secvența genelor, conducând la apariția unor caractere avantajoase. Un beneficiu suplimentar al acestor modificări constă în tendința anumitor segmente genetice de a se transmite împreună, fără a fi separate prin crossing-over, ceea ce este avantajos în cazul în care mutația produce o trăsătură utilă.</p>
+        <p>Majoritatea mutațiilor sunt recesive față de gena „normală”, rămânând neexprimate în populație până când gena mutantă apare în formă homozigotă și se manifestă fenotipic. Foarte rar se produce o mutație dominantă, caz în care efectele se exprimă imediat la nivel fenotipic.</p>
+        <p>Factorii care pot induce mutații sunt denumiți mutageni. Mutațiile pot surveni spontan sau pot fi induse experimental prin aplicarea unor agenți mutageni variabili. Datorită modificărilor fenotipice asociate, identificarea mutațiilor devine relativ facilă. Procesul de apariție a unei mutații, desfășurat în intervalul dintre acțiunea agentului mutagen și manifestarea efectelor sale, se numește mutageneză. Acești factori pot crește frecvența mutațiilor față de frecvența mutațiilor spontane și se împart în trei categorii: factori fizici, chimici și biologici.</p>
+        
+        <h3><b>Factori mutageni fizici</b></h3>
+        <p>Printre principalii factori mutageni de natură fizică se numără radiațiile ultraviolete și radiațiile ionizante.</p>
+        <p class="list-item">•	<b>Radiațiile ultraviolete</b> determină ionizarea bazelor azotate în timpul replicării ADN-ului, rezultând în imperecheri aberante, cum ar fi TG, GT sau TT.</p>
+        <p class="list-item">•	<b>Radiațiile ionizante</b> pot veni sub formă corpusculară (electroni, protoni, neutroni, deutroni, particule alfa) sau sub formă electromagnetică (raze gamma și raze Roentgen). Aceste radiații pot provoca fragmentări ale cromozomilor și/sau ale cromatidelor și pot transforma apa în peroxizi, ceea ce are efecte nocive asupra materialului genetic.</p>
+    
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a douazeci si una poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+         
+        <h3><b>Factori mutageni chimici</b></h3>
+        <p>Factorii mutageni de natură chimică se împart în următoarele categorii: analogi ai bazelor azotate, agenți alkilanti, antibiotice, acridine, acidul nitros și cofeină.</p>
+        <p class="list-item">•	<b>Analogii bazelor azotate</b> (precum 5-bromouracil, 5-clorouracil, 5-iodouracil, 2-bromodeoxiuridina sau 2-aminopurina) induc tranziții de la AT la GC în timpul replicării ADN-ului și, uneori, aceste tranziții sunt bidirecționale, ceea ce poate determina reversia mutațiilor produse.</p>
+        <p class="list-item">•	<b>Agenții alkilanti</b> (ex: dimetilul, dietilsulfatul, etilul, metilmetansulfonatul, epoxizii, colchicina și iperita) conțin grupări alchil (de exemplu, CH₃ și -CH₂) și pot cauza fragmentarea macromoleculelor nucleice, erori de replicare, eliminarea bazelor purinice și blocarea diviziunii celulare prin inhibarea fusului mitotic. Colchicina, de exemplu, blocând fusul celular, duce la rămânerea unuia sau a ambilor cromozomi perechi pe placa metafazică.</p>
+        <p class="list-item">•	<b>Antibioticele</b> pot interacționa cu enzimele implicate în procesele de replicare și transcripție sau pot afecta direct structura ADN-ului, generând astfel mutații.</p>
+        <p class="list-item">•	<b>Acidul nitros</b> acționează prin înlocuirea grupării amino din bazele purinice și pirimidinice, conducând la imperecheri eronate (de exemplu, dezaminarea citozinei determină legarea acesteia cu adenina, nu cu guanina).</p>
+        <p class="list-item">•	<b>Cofeina</b>, la concentrații ridicate, poate inhiba sinteza bazelor azotate, în special adenina și guanina, perturbând etapele normale ale ciclului celular.</p>
+
+        <h3><b>Factori mutageni biologici</b></h3>
+        <p>Principalii factori mutageni de natură biologică sunt <b>virusurile</b>, care pot acționa direct asupra materialului genetic. Prin interacțiunea cu ADN-ul celulelor gazdă, virusurile pot provoca fragmentări cromozomiale, translocații, transformări maligne ale celulelor și modificări ale proceselor de diviziune și diferențiere celulară. Cel mai important mecanism prin care virusurile modifică ADN-ul gazdei constă în inserarea unor segmente de ADN proprii sau preluate din alte celule. Aceste fragmente, odată integrate, devin funcționale și conduc la sinteza unor proteine noi, care pot genera trăsături noi în organism. Datorită capacității lor de a modifica materialul genetic, virusurile sunt folosite ca vectori în terapia genetică, pentru introducerea unor gene utile în genomul altor celule – gene care pot fi destinate producției de medicamente sau înlocuirii genelor defecte.</p>
+    </div>
+
+    <h1 class="page-title">Genetica umană</h1>
+
+    <div class="content-section">
+        <h3><b>1. Metode ce cercetare utilizate in genetica umană</b></h3>
+        <p>Din cauza imposibilității de a efectua încrucișări controlate în genetică umană – spre deosebire de modul în care se procedează în genetică vegetală sau animală – s-au dezvoltat tehnici speciale de investigare a eredității.</p>
+        <p><b>Metoda genealogică (pedigriul)</b>: Această tehnică presupune studierea modului în care se transmit trăsături și afecțiuni ereditare pe mai multe generații, începând de la un proband (un individ la care s-a identificat un caracter particular). Analiza transmisiei acestor trăsături duce la elaborarea unui arbore genealogic – o reprezentare grafică a fenotipurilor membrilor unei familii sau a unor familii înrudite, întinsă pe mai multe generații. Această metodă permite studiul maladiilor monogenice dominante (de ex.: polidactilia, brahidactilia, sindactilia, prognatismul, hemeralopia) și al celor ereditare recesive (de ex.: hemofilia, daltonismul, albinismul, fenilcetonuria).</p>
+    
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a douazeci si sasea poza.jpeg" alt="Tabel rezultate monohibridare"></div>
+                </div>
+
+         <p><b>Metoda studiului gemenilor monozigoți</b>: Gemenii monozigoți provin din același ovul și spermatozoid, deci dispun de același genotip și, implicit, prezintă o asemănare deosebită din punct de vedere anatomic, fiziologic și comportamental, având întotdeauna același sex. Studiul lor a fost esențial pentru determinarea caracterului ereditar al unor afecțiuni, cum ar fi debilitatea mintală, și pentru evidențierea faptului că alte boli (precum tuberculoza) pot fi prezente în familie pe parcursul mai multor generații fără a fi direct determinate genetic.</p>
+        <p><b>Metoda familiilor consangvinizate și a populațiilor izolate endogame</b>: În anumite comunități izolate geografic, etnic sau religios, se practică căsătoriile între rude apropiate (de exemplu, între veri sau între unchi și nepoate), ceea ce favorizează homozygotizarea genelor recesive și, astfel, manifestarea fenotipică a acestora. În populațiile mici, unde are loc endogamia, consangvinizarea conduce la o incidență mai mare a maladiilor și malformațiilor. Astfel, deși albinismul se întâlnește în general la o frecvență de aproximativ 1 la 20.000 de indivizi, în anumite grupuri, precum amerindienii din Panama (Caribe-Cuna) sau în unele regiuni din SUA, incidența poate ajunge la 1 la 400.</p>
+        <p><b>Metode din citogenetică</b>: Aceste tehnici implică studiul cariotipului (atât în condiții normale, cât și patologice), al cromatinei sexuale și al apendicilor nucleari. Ele permit identificarea anomaliilor (structurale sau numerice) ale cromozomilor și sunt esențiale pentru investigarea genomului uman și a modului de transmitere a genelor.</p>
+        <p><b>Metoda biochimică</b>:	 Aceasta reunește toate tehnicile folosite pentru analiza acizilor nucleici și a structurii genelor (atât normale, cât și patologice), precum și a funcționării lor în procesele de transcripție și traducere. În cadrul acestei metode se înscrie și ingineria genetică, care presupune sinteza artificială a genelor și manipularea lor pentru obținerea unor genotipuri specifice.</p>
+        <p><b>Metoda hibridării somatice și moleculare</b>: 	Această tehnică permite localizarea genelor pe cromozomi și realizarea hărții genetice umane. Studiile din cadrul Proiectului Genomul Uman au condus la descifrarea a aproximativ 30.000–35.000 de gene, oferind o bază de referință crucială pentru cercetările ulterioare în genetică.</p>
+        <p><b>Metoda matematică</b>: 		Aplicată la nivel statistic, această metodă facilitează determinarea frecvenței genelor normale sau mutant în populația umană și ajută la stabilirea mecanismelor polifactoriale de determinare a anumitor trăsături.</p>
+        <p><b>Metode moderne de studiu ale eredității umane</b>:	 Progresele științifice și perfecționarea tehnicilor de investigație au condus la dezvoltarea unor metode noi care permit diagnosticarea precoce a maladiilor genetice. Printre acestea se numără:</p>
+        <p class="list-item">•	Studiul complementului cromozomal prin tehnici de bandare, care identifică modificările apărute în numărul și structura cromozomilor.</p>
+        <p class="list-item">•	Analiza cromatinei sexuale, bazată pe heterocromatinizarea unuia dintre cromozomii de la sexul feminin, metodă care permite atât determinarea sexului fătului, cât și identificarea aberatiilor ale heterozomilor.</p>
+        <p class="list-item">•	Metodele matematice de evaluare a frecvenței genelor.</p>
+        <p class="list-item">•	Determinările biochimice ale mutațiilor din materialul genetic și ale proteinelor implicate.</p>
+        <p class="list-item">•	Diagnoza prenatală prin amniocenteză, tehnică ce oferă posibilitatea de a investiga direct materialul genetic și proteic din celulele fătului.</p>
+    
+        <h3><b>2. Cariotipul uman normal</b></h3>
+        <p><b>Cariotipul</b> reprezintă ansamblul cromozomilor unei celule diploide, aranjați în perechi și grupați în funcție de mărime, formă, poziția centromerului și alte caracteristici morfologice. </p>
+        <p>Numărul corect de cromozomi ai omului a fost stabilit în anul 1956 de citogeneticienii H. Tjio și A. Levan, iar cariotipul uman normal este 2n = 46. Acesta este compus din 44 de autozomi (adică 22 de perechi) și o pereche de cromozomi sexuali (numiți și gonozomi sau heterozomi). Caracteristicile cromozomilor umani, observabile cel mai bine în stadiul metafazic sau în profaza târzie (atunci când cromozomii sunt mai extinși), sunt similare cu cele întâlnite la alte animale și plante. Un cromozom în stadiul metafazic este format din două cromatide surori, rezultate în urma compactării fibrelor de cromatină din nucleul interfazic, și conține întreaga cantitate de ADN nuclear.</p>
+        <p>Capetele cromozomilor, numite <b>telomere</b>, sunt rotunjite și alcătuite din secvențe repetitive de ADN. Aceste structuri au rolul de a proteja integritatea cromozomilor, iar absența telomerelor (precum în cazul delețiilor terminale) poate conduce la fuziunea cromozomilor între ei.</p>
+        <p><b>Centromerul</b> se găsește în regiunea de constricție primară a cromozomului și reprezintă locul în care cele două cromatide surori sunt unite. Acesta împarte cromozomul în două brațe: brațul scurt (notat p) și brațul lung (notat q). În funcție de poziția centromerului, cromozomii umani pot fi clasificați astfel:</p>
+        <p class="list-item">•	<b>Metacentrici</b>: centromerul este localizat aproximativ în mijlocul cromozomului.</p>
+        <p class="list-item">•	<b>Submetacentrici</b>: centromerul se găsește puțin deplasat de la centru.</p>
+        <p class="list-item">•	<b>Acrocentrici</b>: centromerul este situat aproape de unul din capete (dar nu la extremitate). La om, doar anumiți autozomi acrocentrici prezintă o constricție secundară pe brațul scurt, urmată de un satelit.</p>
+        <p>La nivelul centromerului se află <b>kinetocorul</b>, o structură esențială în ancorarea cromozomilor pe fibrele contractile ale fusului de diviziune în timpul profazei mitotice.</p>
+        <p>În practica citogenetică, cromozomii se evidențiază cel mai bine în stadiul de metafază, când se aplică tehnici de colorare ce generează un model de benzi specifice. Această bandare, determinată de alternanța zonelor de <b>eucromatină</b> (mai puțin condensată) și <b>heterocromatină</b> (mai condensată), permite identificarea precisă a perechilor de cromozomi omologi și recunoașterea unor anomalii structurale (cum ar fi translocațiile, delețiile sau adițiile).</p>
+    
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a douazeci si saptea poza.jpeg" alt="Tabel rezultate monohibridare">
+                </div>
+            
+        <p>Cariotipul uman standard include 46 de cromozomi, organizați în 22 de perechi de autozomi și o pereche de cromozomi sexuali (femeile având XX iar bărbații XY). În funcție de dimensiune, poziția centromerului și prezența sateliților, cromozomii se clasifică în șapte grupe notate cu litere de la A la G:</p>
+        <p class="list-item"><b>Grupa A: </b>cromozomii perechilor 1–3, cei mai mari; perechile 1 și 3 sunt metacentrice, iar perechea 2 este submetacentrică.</p>
+        <p class="list-item"><b>Grupa B: </b>cromozomii perechilor 4 și 5, mari și submetacentrici.</p>
+        <p class="list-item"><b>Grupa C: </b>cromozomii perechilor 6–12, de mărime medie și metacentrici; în această grupă se include și cromozomul X.</p>
+        <p class="list-item"><b>Grupa D: </b>cromozomii perechilor 13–15, mai mici și acrocentrici, care prezintă sateliți pe brațul scurt.</p>
+        <p class="list-item"><b>Grupa E: </b>cromozomii perechilor 16–18; perechea 16 este metacentrică, iar perechile 17 și 18 sunt submetacentrice.</p>
+        <p class="list-item"><b>Grupa F: </b>cromozomii perechilor 19 și 20, scurți și metacentrici.</p>
+        <p class="list-item"><b>Grupa G: </b>cromozomii perechilor 21–22, scurți, acrocentrici și cu sateliți; în această grupă se încadrează și cromozomul Y, care, deși acrocentric, nu prezintă satelit.</p>
+        
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a douazeci si opta poza.jpeg" alt="Tabel rezultate monohibridare">
+                </div>
+
+       <p>Tehnica de bandare permite identificarea fiecărui cromozom pe baza unui model specific de benzi, rezultat din compoziția chimică a segmentelor de ADN. Acest model invariant asigură recunoașterea exactă a perechilor de omologi în cariotipul uman, indiferent de tipul de celulă sau țesut analizat.</p>
+       
+       <h3><b>Aplicație practică – Analiza cariotipului uman prin tehnica de bandare</b></h3>
+       <p>Pentru identificarea cromozomilor și alcătuirea cariotipului uman, se recoltează celule (de obicei limfocite) care se cultivă în medii speciale și apoi se tratează pentru evidențierea cromozomilor. Celulele sunt așezate pe un frotiu, colorate și fotografiate. Metoda cea mai utilizată este tehnica G, ce folosește <b>soluția Giemsa</b> pentru colorarea cromozomilor. După tratament, pe brațele cromozomilor apar benzi transversale cu intensități variabile, care reflectă distribuția zonelor de eucromatină și heterocromatină. Fotografiile celulelor aflate în metafază permit ulterior ordonarea cromozomilor în perechi și grupe, în funcție de mărime, formă și poziția centromerilor.</p>
+    
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a douazeci si noua poza.jpeg" alt="Tabel rezultate monohibridare">
+                </div>
+          
+        <h3><b>Determinismul genetic al culorii ochilor la om</b></h3>
+        <p>Culoarea ochilor la om variază de la nuanțe de albastru deschis până la tonuri aproape negre, prezentând multiple variații intermediare. Această diversitate este considerată complexă, deoarece este reglată de trei gene care controlează pigmentația, notate (în teorie) ca E^bl (bl=blue) pentru ochi albaștri, E^br (br=brown) pentru ochi negri și E^gr (gr=green) pentru ochi verzi. Ordinea dominanței acestor alele este: E^br > E^gr > E^bl. Drept urmare, ochii albaștri se întâlnesc doar la indivizii homozigoți pentru alela E^bl, iar în cazul heterozigoților interacțiunea celor trei alele produce nuanțe intermediare. De asemenea, s-a descoperit că o genă de pe cromozomul X poate intensifica pigmentarea ochilor la femei (care au doi cromozomi X) în comparație cu bărbații, care au un singur cromozom X—această influență fiind sex-linkată.</p>
+        <h3><b>Determinismul genetic al culorii pielii la om</b></h3>
+        <p>Nuanța pielii la om variază de la o rasă la alta și este determinată în principal de cantitatea de melanină produsă. Aceasta, la rândul ei, este reglată de mai multe gene care acționează cumulativ. Diferite studii propun că numărul perechilor de gene implicate în pigmentare poate varia între 2 și 20, însă este clar că aceste gene se segregă independent și efectul lor combinat produce variații cuantitative ale pigmentării pielii.</p>
+        <h3><b>Determinismul genetic al culorii părului la om</b></h3>
+        <p>Culoarea părului depinde de tipul și cantitatea pigmenților sintetizați, fiind influențată de două perechi de gene: una responsabilă de producerea pigmentului brun (melanina) și cealaltă de pigmentul roșu. Fiecare pereche dispune de serii de alele (polialele) – genele de tip M pentru melanina: M^bl (blond), M^bw (șaten), M^bk (brunet) și genele R pentru pigmentul roșu: R+, R-R-. Combinarea acestor alele produce o gamă largă de nuanțe, de la blond deschis până la negru intens.</p>
+        <h3><B>Determinismul genetic al sexelor la om</B></h3>
+        <p>Sexul uman este determinat de genele situate pe anumite cromozomi denumiți cromozomi de sex sau heterozomi. Femeile au configurația cromozomială homogametică (XX) și, astfel, produc un singur tip de ovule. Bărbații au configurația heterogametică (XY), generând două tipuri de spermatozoizi, unul cu cromozom X și altul cu cromozom Y. Deoarece cromozomii X și Y nu sunt omologi, nu are loc recombinarea între ei, spre deosebire de cromozomii X din femei. Prezența cromozomului Y este esențială pentru determinarea masculinului, iar lipsa unei a doua alele pentru genele de pe Y face ca anumite trăsături recesive să se exprime la bărbați (fenomen numit <b>hemizigoziție</b>). De exemplu, apariția cheliei timpurii la bărbați este legată de genele de pe cromozomul Y. În timpul meiozei, erorile în separarea cromozomilor pot conduce la formarea unor gameți anormali, ceea ce poate afecta viabilitatea embrionilor.</p>
+        <h3><b>Determinismul genetic al inteligenței</b></h3>
+        <p>Teoriile actuale privind determinarea genetică a inteligenței recunosc că aceasta rezultă din interacțiunea între factorii ereditari și cei de mediu. Potențialul intelectual se stabilizează la naștere prin genotip, dar se manifestă pe deplin doar în condiții favorabile de dezvoltare și educație. Testele standardizate, care măsoară coeficientul de inteligență (QI), arată o distribuție gaussiană în populație: indivizii cu QI între 120–140 sunt considerați foarte inteligenți, iar cei cu QI între 70–80 prezintă anumite deficiențe, în timp ce majoritatea oamenilor au valori între 90 și 110. Studiile asupra copiilor adoptați confirmă că QI-ul lor este puternic corelat cu cel al părinților biologici, evidențiind componenta genetică. În prezent, nu se recunoaște existența unei gene „a inteligenței”; caracterul este poligenic, derivând din efectul cumulativ al numeroase gene.</p>
+        <h3><b>3.Maladiile cromozomale umane</b></h3>
+        <p>Orice afecțiune care are la bază o modificare a informației genetice este considerată o boală genetică. Totuși, termenul „maladie genetică” nu este sinonim cu cel de „maladie ereditară”, deoarece nu toate modificările din materialul genetic se transmit la descendenți. De fapt, majoritatea anomaliilor cromozomale nu sunt moștenite și se clasifică, în funcție de nivelul la care apare modificarea, în maladii cromozomale și maladii metabolice.</p>
+        <h3><b>Anomalii autozomale</b></h3>
+        <p>Cromozomii autozomali la om sunt de dimensiuni mari și conțin un număr considerabil de gene, astfel încât orice modificare numerică poate avea consecințe severe. Apariția anomaliilor numerice ale cromozomilor este determinată de <b>nondisjuncția</b> perechilor de cromozomi în timpul diviziunii celulare. Acest fenomen poate fi influențat de factori genetici specifici – determinați de caracteristicile materialului genetic al părinților – sau de factori mediolari asociați mediului de viață.</p>
+    
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a treizecea poza.jpeg" alt="Tabel rezultate monohibridare">
+                </div>
+         
+        <p>Analizele privind malformațiile embrionare arată că monosomiile (lipsa unui cromozom) ale autozomiilor duc, de regulă, la decesul timpuriu al embrionului. Cele mai frecvente anomalii autosomale apar sub formă de trisomii (prezența unui cromozom suplimentar) sau prin restructurări cromozomale, cum ar fi delețiile și translocațiile. Dintre trisomiile autosomale, majoritatea nu sunt compatibile cu viața embrionară; totuși, cele viabile se regăsesc frecvent la cromozomii 13, 18 și 21, aceasta din urmă fiind cea mai întâlnită.</p>
+        <p><b>Trisomia 21</b>, cunoscută și ca sindromul Down, apare la aproximativ 1 din 600–700 de nou-născuți. Această afecțiune a fost identificată în 1959 de cercetătorul Lejeune. Cromozomul 21 suplimentar poate fi prezent sub formă liberă sau translocat pe alt cromozom. Indivizii cu sindrom Down prezintă caracteristici specifice, cum ar fi capul mic, ochii oblici, nasul turtit la bază, prezența epicantului, urechi mai mici și cu poziționare inferioară, gâtul scurt, degete scurte, piele uscată și aspră, iar în general apar și întârzieri mintale. Pe lângă modificările morfologice, această afecțiune este asociată și cu modificări ale activității enzimatice, cum ar fi creșterea activității enzimei superoxid-dismutază. Deși media de viață a persoanelor cu sindrom Down a fost inițial foarte scăzută, descoperirea antibioticelor și îmbunătățirea tratamentelor au determinat o creștere a speranței de viață, raportându-se cazuri în care persoanele afectate au depășit vârsta de 50 de ani.</p>
+    
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a treizeci si una poza.png" alt="Tabel rezultate monohibridare">
+                </div>
+         
+        <p><b>Trisomia 18</b>, cunoscută sub numele de sindrom Edwards, apare la o incidență de aproximativ 0,01–0,08, în funcție de zona geografică. Indivizii afectați de această anomalie prezintă malformații ale capului, feței, toracelui și gâtului, întârzieri mintale, deficiențe neurosenzoriale și malformații cardiace.</p>
+        <p><b>Trisomia 13</b>, sau sindromul Patau, are o incidență de aproximativ 0,01 %; majoritatea embrionilor afectați sunt eliminați în primele trei luni intrauterine. Această afecțiune se manifestă prin numeroase malformații ale scheletului și ale sistemului nervos central.</p>
+        <p>În plus față de aceste anomalii numerice, restructurările cromozomale – cum ar fi delețiile, inversiunile și translocațiile – pot genera malformații congenitale și maladii ereditare. De exemplu, <b>sindromul „cri du chat”</b> rezultă dintr-o deleție parțială a brațului scurt al cromozomului 5 și se manifestă prin microcefalie, întârzieri severe în dezvoltarea mintală, deficiențe în creștere și malformații ale laringelui, ceea ce provoacă plânsul caracteristic al copiilor afectați. O altă anomalie notable este o deleție parțială a brațului scurt al cromozomului 4, o condiție observată mai frecvent la fete decât la băieți, care conduce la o speranță de viață scurtă.</p>
+        <h3><b>Anomalii heterozomale</b></h3>
+        <p>Cromozomii sexuali X și Y sunt esențiali nu numai pentru menținerea raportului între sexe, dar și pentru numărul mare de gene conținute, în special pe cromozomul X (care cuprinde aproximativ 5 % din genomul uman). Anomaliile heterozomale, adică cele ce afectează cromozomii sexuali, pot avea consecințe grave sau letale. Cauza principală a acestor anomalii este nondisjuncția cromozomilor sexuali în timpul meiozei, ceea ce duce la formarea de gameți cu număr aberant de cromozomi X și Y, iar fecundarea acestora produce descendenți cu modificări numerice ale heterozomilor. Dacă nondisjuncția apare și în formarea gameților masculini, efectele pot fi și mai severe.</p>
+        <p>Cele mai importante aberații heterozomale sunt ilustrate în tabelul de mai jos:</p>
+    
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a treizeci si doua poza.jpeg" alt="Tabel rezultate monohibridare">
+                </div>
+         
+        <h3><b>Caracteristicile generale ale anomaliilor cromozomale</b></h3>
+        <p>Majoritatea anomaliilor cromozomale (numerice sau structurale) care apar la zigot sunt eliminate în stadiile incipiente ale dezvoltării datorită stabilității cariotipului uman, dobândită de-a lungul evoluției. În cazul în care un copil se naște cu astfel de anomalii, acesta va prezenta întârzieri mintale, malformații multiple și, adesea, infertilitate. De asemenea, multe dintre produsele de concepție cu anomalii cromozomale sunt eliminate în timpul dezvoltării intrauterine.</p>
+        <p>Frecvența apariției acestor anomalii crește odată cu vârsta mamei, deoarece femeile de peste 40 de ani au mai puțină capacitate de a elimina embrionii anormali. Studiile recente indică faptul că și vârsta tatălui joacă un rol important, astfel că, conform tehnicii de bandare, în aproximativ 24 % dintre cazurile de trisomie 21 cromozomul suplimentar provine de la tată.</p>
+        <h3><b>4. Maladii genetice metabolice</b></h3>
+        <p>Maladiile metabolice ereditare rezultă din mutații ale genelor, care perturbă procesul normal de metabolism celular. Ipoteza existenței unor erori înnăscute ale metabolismului a fost formulată încă din 1909, când se cunoșteau afecțiuni precum albinismul, alcaptonuria, cistinuria și pentosuria. În prezent sunt identificate aproximativ 3.500 de maladii ereditare, dintre care circa 300 sunt deosebit de semnificative. Tulburările determinate de deficiența enzimatică apar ca urmare a unei mutații care duce la scăderea sau la absența activității unei enzime; în sens larg, toate maladiile ereditare pot fi considerate erori de metabolism.</p>
+        <p>În funcție de localizarea genelor afectate, maladiile metabolice se împart în două categorii:</p>
+        <h3><b>1. Maladiile metabolice autozomale</b></h3>
+        <p>Atunci când mutațiile afectează genele de pe autozomi, consecințele sunt similare la ambele sexe. Cele mai frecvente maladii ereditare autozomale includ:</p>
+        <p>a) <b>Enzimopatiile</b>: Acestea apar din mutații ale genelor implicate în sinteza enzimelor. <b>Exemple de enzimopatii</b>:</p>
+        <p class="list-item"><b>o	Galactozemia: </b>Determinată de producția insuficientă de enzime care transformă galactoza în glucoză, ceea ce inhibă metabolismul hidrocarburilor.</p>
+        <p class="list-item"><b>o	Fenilcetonuria: </b>Apare din blocarea transformării fenilalaninei în tirozină, din cauza deficienței de fenilalanin-hidroxilază, afectând sistemul nervos și ducând la idiotie fenilpiruvică.</p>
+        <p class="list-item"><b>o	Albinismul: </b>Se datorează unei deficiențe în sinteza enzimei tirozinază, blocând astfel formarea pigmentului melanină, rezultând o depigmentare a părului, ochilor și tegumentului, cu creșterea sensibilității la lumină.</p>
+        <p class="list-item"><b>o	Cretinismul sporadic cu gușă: </b>Din cauza lipsei enzimei care transformă tirozina în tiroxină, se blochează sinteza hormonilor tiroidieni, afectând dezvoltarea normală.</p>
+        <p>b) <b>Hemoglobinopatiile</b>: Aceste afecțiuni sunt cauzate de mutații în genele implicate în sinteza lanțurilor polipeptidice ale hemoglobinei. Hemoglobina umană este o heteroproteină compusă dintr-o parte proteică (globulina) și hem, iar mutațiile pot afecta sinteza lanțurilor alfa sau beta. Aceste anomalii se manifestă sub forma anemiilor, chiar dacă manifestările variază de la producție redusă de hemoglobină până la formarea de hematii instabile. <b>Exemple</b>:</p>
+        <p class="list-item"><b>•	Anemia falciformă: </b>Rezultă din înlocuirea acidului glutamic din poziția a VI-a cu aminoacidul valină. În condiții homozigote, boala este letală, iar în condiții heterozigote, hematiile capătă forma de seceră și transportă cantități reduse de oxigen.</p>
+        <p class="list-item"><b>•	Talasemia majoră: </b>Caracterizată prin blocarea sintezei lanțului beta, determinând o producție insuficientă a hemoglobinei și compensarea prin creșterea hemoglobinei fetale (HbF).</b></p>
+        <p>Anemia falciformă este frecvent întâlnită în regiunile unde malaria este endemică (Africa, Asia, Oceania, regiuni mediteraneene), conferind un avantaj selectiv în starea de heterozigoție, deoarece celulele cu formă de seceră inhibă dezvoltarea agentului patogen (Plasmodium falciparum).</p>
+        <p>c) <b>Alte tulburări metabolice:</b></p>
+        <p class="list-item"><b>•	Metabolismul azoturilor: </b>Mutațiile care afectează enzimele din primele etape ale sintezei purinelor pot duce la afecțiunea cunoscută sub numele de gută, caracterizată prin hiperuricemie și acumularea cristalelor de urat în articulații.</p>
+        <p class="list-item"><b>•	Metabolismul mineral: </b>Condiții precum hemocromatoza sau atransterinemia congenitală se caracterizează prin acumulări excesive de fier în țesuturi.</p>
+        <p class="list-item"><b>•	Metabolismul lipidelor: </b>Mutațiile din genele care reglează enzimele din acest sistem dau naștere la afecțiuni precum hiperlipemia idiopatică (deficiența lipoproteinlipazei și acumularea de trigliceride) și hipercolesterolemia (depozitarea de colesterol și fosfolipide).</p>
+        <p class="list-item"><b>•	Metabolismul glucidelor: </b>Este perturbat atunci când mutațiile afectează sinteza sau descompunerea glicogenului și a glucidelor simple.</p>
+        <h3><b>2. Maladiile metabolice heterozomale</b></h3>
+        <p>Aceste maladii sunt determinate de mutații în genele situate pe cromozomii sexuali (heterozomi) și se transmit ca afecțiuni sex-linkate, având frecvențe diferite la bărbați și femei. Cele mai cunoscute forme includ:</p>
+        <p class="list-item"><b>•	Hemofilia: </b>Apare din deleția unui fragment de pe cromozomul X, ducând la deficiențe severe ale procesului de coagulare. Deoarece gena afectată se găsește pe cromozomul X, hemofilia se manifestă practic exclusiv la bărbați. De exemplu, o femeie purtătoare heterozigotă X^h X aparent normală, căsătorită cu un bărbat normal XY, poate genera fiice purtătoare (X^h X) și fii hemofilici (X^h Y) în proporții aproximativ egale.</p>
+        <p class="list-item"><b>Daltonismul: </b>Este caracterizat prin incapacitatea de a distinge anumite culori (în special roșu de verde) și se transmite în mod similar cu hemofilia, afectând mult mai frecvent bărbații (aproximativ 8%) decât femeile (aproximativ 0,48%).</p>
+
+                <div class="poza">
+                    <div class="image-placeholder"><img src="a treizeci si treia poza.jpeg" alt="Tabel rezultate monohibridare">
+                </div>
+        <p class="list-item"><b>•	Miopatia Duchenne (distrofia musculară Duchenne)</b>: Această afecțiune, care afectează aproximativ 1 la 3.500 de băieți, este cauzată de o mutație a unei gene situate pe cromozomul X, fiind una dintre cele mai mari gene cunoscute pentru predispoziția sa la mutații. Miopatia Duchenne se manifestă prin dificultăți precoce în mers, progresează spre atrofia musculară severă (inclusiv a mușchiului cardiac) și poate fi fatală la adolescență sau la începutul vârstei adulte.</p>
+    
+    
+    </div>
+    <script>
+            // DOM Elements
+            const menuToggle = document.getElementById('menu-toggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const container = document.getElementById('container');
+            
+            // Toggle Sidebar Function
+            function toggleSidebar() {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                
+                // Toggle Menu Icon Animation
+                const spans = menuToggle.getElementsByTagName('span');
+                if (sidebar.classList.contains('active')) {
+                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    spans[1].style.opacity = '0';
+                    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+                } else {
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                    
+                    // Close any open submenus when closing the sidebar
+                    const openSubmenus = document.querySelectorAll('.has-submenu.active, .has-sub-submenu.active');
+                    openSubmenus.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                }
+            }
+            
+            // Event Listeners
+            menuToggle.addEventListener('click', toggleSidebar);
+            overlay.addEventListener('click', toggleSidebar);
+            
+            // Submenu Toggle
+            const submenuItems = document.querySelectorAll('.has-submenu .menu-toggle');
+            
+            submenuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const parent = this.parentElement;
+                    
+                    // Toggle the active class on the parent li
+                    parent.classList.toggle('active');
+                    
+                    // Close other open submenus if needed
+                    const allSubmenus = document.querySelectorAll('.has-submenu');
+                    allSubmenus.forEach(submenuItem => {
+                        if(submenuItem !== parent && submenuItem.classList.contains('active')) {
+                            submenuItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Sub-Submenu Toggle
+            const subSubmenuItems = document.querySelectorAll('.has-sub-submenu .sub-menu-toggle');
+            
+            subSubmenuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const parent = this.parentElement;
+                    
+                    // Toggle the active class on the parent li
+                    parent.classList.toggle('active');
+                    
+                    // Close other open sub-submenus if needed
+                    const allSubSubmenus = document.querySelectorAll('.has-sub-submenu');
+                    allSubSubmenus.forEach(subSubmenuItem => {
+                        if(subSubmenuItem !== parent && subSubmenuItem.classList.contains('active')) {
+                            subSubmenuItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Card Animation on Scroll
+            const cards = document.querySelectorAll('.card');
+            
+            function checkCards() {
+                const triggerBottom = window.innerHeight * 0.8;
+                
+                cards.forEach(card => {
+                    const cardTop = card.getBoundingClientRect().top;
+                    
+                    if (cardTop < triggerBottom) {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                    }
+                });
+            }
+            
+            // Initialize Cards and check for mobile viewport
+            function initCards() {
+                cards.forEach(card => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                });
+                
+                // Force reflow to apply initial styles before triggering animations
+                document.body.offsetHeight;
+                
+                // Immediate check for cards
+                checkCards();
+                
+                // Check if on mobile and adjust if needed
+                if (window.innerWidth <= 768) {
+                    adjustForMobile();
+                }
+            }
+            
+            // Adjust for mobile specific issues
+            function adjustForMobile() {
+                // Ensure cards are visible on mobile
+                cards.forEach(card => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                    card.style.minHeight = '150px';
+                    card.style.display = 'block';
+                    card.style.width = '100%';
+                });
+            }
+            
+            // Check cards on load and scroll
+            window.addEventListener('load', initCards);
+            window.addEventListener('resize', function() {
+                if (window.innerWidth <= 768) {
+                    adjustForMobile();
+                }
+            });
+            window.addEventListener('scroll', checkCards);
+            
+            // Glow effect on hover for cardsF
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.boxShadow = '0 0 15px rgba(0, 230, 192, 0.5)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.3)';
+                });
+            });
+        </script>
+    </body>
+    </html>
