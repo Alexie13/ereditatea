@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ereditatea și Variabilitatea - Biogenius Academy</title>
     <style>
+        /* Variabile CSS preluate din primul site */
         :root {
             --primary-color: #00e6c0;
             --secondary-color: #00b3a1;
             --background-color: #021726;
             --dark-color: #01111b;
             --text-color: #ffffff;
-            --sidebar-width: 250px;
-            --header-height: 60px;
             --card-background: rgba(0, 230, 192, 0.1);
             --card-border: rgba(0, 230, 192, 0.3);
             --orange-neon: #FF9500;
@@ -31,19 +30,13 @@
         body {
             background-color: var(--background-color);
             color: var(--text-color);
+            line-height: 1.6;
             overflow-x: hidden;
-        }
-
-        .container {
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-            transition: margin-left 0.4s ease;
         }
 
         /* Header Styles */
         header {
-            height: var(--header-height);
+            height: 60px;
             background-color: var(--dark-color);
             display: flex;
             align-items: center;
@@ -70,212 +63,8 @@
             letter-spacing: 1px;
         }
 
-        .logo svg {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-        }
-
-        /* Main Content Styles */
-        .main-content {
-            margin-top: var(--header-height);
-            padding: 20px;
-            transition: margin-left 0.4s ease;
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
-            overflow-x: hidden;
-        }
-
-        .page-title {
-            margin-bottom: 30px;
-            position: relative;
-            padding-bottom: 10px;
-            text-align: center;
-            color: var(--primary-color);
-            margin-top: 30px;
-            font-size: 2.2rem;
-        }
-
-        .page-title::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background-color: var(--primary-color);
-        }
-
-        .content-section {
-            background-color: var(--card-background);
-            border-radius: 10px;
-            border: 1px solid var(--card-border);
-            padding: 30px;
-            margin-bottom: 30px;
-            width: 100%;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .content-section h2 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-            display: inline-block;
-        }
-
-        .content-section p {
-            margin-bottom: 15px;
-            line-height: 1.6;
-            text-align: justify;
-        }
-
-        .titlu-2 {
-            padding-left: 10px;
-            font-size: 1.6rem;
-            color: var(--primary-color);
-            margin: 30px 0 20px 0;
-        }
-
-        .image-placeholder {
-            width: 100%;
-            position: relative;
-            padding-bottom: 56.25%; /* Raport 16:9, poți ajusta în funcție de nevoie */
-            background-color: #ffffff; /* Fundal alb pentru container */
-            border: 2px dashed var(--primary-color);
-            margin: 20px 0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .image-placeholder img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Păstrează imaginea completă fără tăieri */
-            background-color: #ffffff; /* Fundal alb pentru zonele neacoperite de imagine */
-            display: block;
-        }
-
-        .poza {
-            padding: 25px 0;
-            text-align: center;
-        }
-
-        .poza-2 {
-            padding: 15px 0;
-            text-align: center;
-        }
-
-        
-
-        .home-icon {
-            width: 24px;
-            height: 24px;
-            fill: var(--dark-color);
-        }
-
-        /* Brain Decoration */
-        .brain-decoration {
-            position: fixed;
-            bottom: -100px;
-            right: -100px;
-            width: 300px;
-            height: 300px;
-            opacity: 0.1;
-            z-index: -1;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300e6c0'%3E%3Cpath d='M12 2c1.9 0 3.6.8 4.8 2 1.2 1.2 2 2.9 2 4.8 0 3.2-2.2 5.8-5.2 6.6v.6c0 1.1-.9 2-2 2h-.4c-1.1 0-2-.9-2-2v-.6C6.2 14.6 4 12 4 8.8c0-1.9.8-3.6 2-4.8C7.4 2.8 9.1 2 11 2h1zm0 2c-1.3 0-2.5.5-3.4 1.4-.9.9-1.4 2.1-1.4 3.4 0 2.2 1.5 4.1 3.6 4.7.2.1.4.3.4.5v1c0 .6.4 1 1 1h.8c.6 0 1-.4 1-1v-1c0-.2.2-.4.4-.5 2.1-.6 3.6-2.5 3.6-4.7 0-1.3-.5-2.5-1.4-3.4-.9-.9-2.1-1.4-3.4-1.4h-1z'/%3E%3C/svg%3E");
-            background-size: cover;
-            background-repeat: no-repeat;
-            transform: rotate(45deg);
-        }
-
-        /* Responsiveness */
-        @media (max-width: 768px) {
-            body, html {
-                overflow-x: hidden;
-                width: 100%;
-                position: relative;
-            }
-            
-            .container {
-                width: 100%;
-                overflow-x: hidden;
-            }
-            
-            .content-section {
-                padding: 20px 15px;
-            }
-            
-            .page-title {
-                font-size: 1.8rem;
-            }
-            
-           
-            .home-icon {
-                width: 20px;
-                height: 20px;
-            }
-            
-            .titlu-2 {
-                font-size: 1.4rem;
-                padding-left: 5px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .content-section {
-                padding: 15px 10px;
-            }
-
-            .logo h1 {
-                font-size: 0.9rem;
-            }
-            
-            .main-content {
-                padding: 15px 10px;
-            }
-            
-            .page-title {
-                font-size: 1.5rem;
-                margin-top: 20px;
-            }
-        }
-
-        /* Header pentru versiunea mobilă */
-        @media (max-width: 360px) {
-            header {
-                height: 50px;
-                padding: 0 10px;
-            }
-            
-            .logo h1 {
-                font-size: 0.9rem;
-                padding-left: 35px;
-                white-space: nowrap;
-            }
-            
-            .logo svg {
-                width: 25px;
-                height: 25px;
-            }
-            
-            
-        /* Stiluri specifice acestei pagini */
-        .list-style {
-            margin-bottom: 15px;
-            line-height: 1.6;
-            text-align: justify;
-            padding-left: 30px;
-        }
-.home-button {
+        /* Buton Acasă - Design îmbunătățit și centrat */
+        .home-button {
             position: absolute;
             left: 20px;
             top: 50%;
@@ -300,27 +89,7 @@
             min-width: 100px;
             text-align: center;
         }
-             .home-button {
-                min-width: 60px;
-            }
-            
-              .home-button {
-                left: 5px;
-                min-width: 70px;
-                padding: 4px 8px;
-                font-size: 0.7rem;
-            }
-            
-            .home-button i {
-                font-size: 0.9rem;
-            }
- .home-button {
-                left: 10px;
-                min-width: 90px;
-                padding: 5px 10px;
-                font-size: 0.8rem;
-            }
-            
+
         .home-button:hover {
             transform: translateY(calc(-50% - 3px)) scale(1.05);
             box-shadow: 0 6px 20px rgba(0, 230, 192, 0.5);
@@ -334,34 +103,342 @@
             font-size: 1.1rem;
         }
 
-        .list-item {
-            margin-bottom: 10px;
-            line-height: 1.6;
+        /* Main Content Styles */
+        .main-content {
+            margin-top: 80px;
+            padding: 20px;
+            transition: margin-left 0.4s ease;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-title {
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .page-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        /* Card pentru conținut */
+        .content-card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 230, 192, 0.5);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .subsection-title {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        /* Text formatat */
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-color);
             text-align: justify;
-            margin-left: 30px;
         }
 
-        .titlu-3 {
-            color: var(--primary-color);
-            margin: 15px 0 10px 0;
-            font-size: 1.3rem;
-        }
-
-        h3 {
-            color: var(--primary-color);
-            margin: 15px 0 10px 0;
-            font-size: 1.3rem;
-        }
-        
         ul, ol {
-            margin-left: 40px;
-            margin-bottom: 15px;
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
         }
-        
+
         li {
-            margin-bottom: 8px;
-            line-height: 1.6;
-            text-align: justify;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Highlight pentru termeni importanți */
+        .highlight {
+            color: var(--yellow-neon);
+            font-weight: 600;
+        }
+
+        .right-align {
+            margin-left: 20px;
+        }
+
+        /* Spațiu pentru imagini */
+      .image-placeholder {
+    width: 100%;
+    position: relative;
+    padding-bottom: 56.25%; /* Raport 16:9, poți ajusta în funcție de nevoie */
+    background-color: #ffffff; /* Fundal alb pentru container */
+    border: 2px dashed var(--primary-color);
+    margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.image-placeholder img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Păstrează imaginea completă fără tăieri */
+    background-color: #ffffff; /* Fundal alb pentru zonele neacoperite de imagine */
+    display: block;
+}
+        .poza {
+            padding: 25px 0;
+            text-align: center;
+        }
+
+        .poza-2 {
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        /* Brain Decoration */
+        .brain-decoration {
+            position: fixed;
+            bottom: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            opacity: 0.1;
+            z-index: -1;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300e6c0'%3E%3Cpath d='M12 2c1.9 0 3.6.8 4.8 2 1.2 1.2 2 2.9 2 4.8 0 3.2-2.2 5.8-5.2 6.6v.6c0 1.1-.9 2-2 2h-.4c-1.1 0-2-.9-2-2v-.6C6.2 14.6 4 12 4 8.8c0-1.9.8-3.6 2-4.8C7.4 2.8 9.1 2 11 2h1zm0 2c-1.3 0-2.5.5-3.4 1.4-.9.9-1.4 2.1-1.4 3.4 0 2.2 1.5 4.1 3.6 4.7.2.1.4.3.4.5v1c0 .6.4 1 1 1h.8c.6 0 1-.4 1-1v-1c0-.2.2-.4.4-.5 2.1-.6 3.6-2.5 3.6-4.7 0-1.3-.5-2.5-1.4-3.4-.9-.9-2.1-1.4-3.4-1.4h-1z'/%3E%3C/svg%3E");
+            background-size: cover;
+            background-repeat: no-repeat;
+            transform: rotate(45deg);
+        }
+
+        /* Conținut extensibil */
+        .title-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--card-background);
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 20px 0 0 0;
+            border: 1px solid var(--card-border);
+        }
+
+        .title-container h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .toggle-btn {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background-color: var(--secondary-color);
+            transform: rotate(90deg);
+        }
+
+        .content-box {
+            border: 1px solid var(--card-border);
+            border-top: none;
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+            background-color: var(--card-background);
+            transition: all 0.3s ease;
+        }
+
+        .section-centered {
+            text-align: center;
+        }
+
+        .alte-pagini {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .alte-pagini:hover {
+            color: var(--yellow-neon);
+        }
+
+        .poza-patru {
+            padding-left: 10%;
+        }
+
+        /* Responsive design îmbunătățit */
+        @media (max-width: 992px) {
+            .main-content {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+            
+            .home-button {
+                left: 10px;
+                min-width: 90px;
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .subsection-title {
+                font-size: 1.2rem;
+            }
+            
+            .image-placeholder {
+                height: auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-content {
+                padding: 10px;
+                margin-top: 70px;
+            }
+            
+            .logo h1 {
+                font-size: 1.1rem;
+            }
+            
+            .logo svg {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .home-button {
+                left: 5px;
+                min-width: 70px;
+                padding: 4px 8px;
+                font-size: 0.7rem;
+            }
+            
+            .home-button i {
+                font-size: 0.9rem;
+            }
+            
+            .page-title {
+                font-size: 1.6rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .subsection-title {
+                font-size: 1.1rem;
+            }
+            
+            .image-placeholder {
+                height: auto;
+            }
+            
+            .content-card {
+                padding: 15px;
+            }
+            
+            p, li {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            header {
+                height: 50px;
+            }
+            
+            .logo h1 {
+                font-size: 1rem;
+            }
+            
+            .logo svg {
+                width: 25px;
+                height: 25px;
+            }
+            
+            .home-button {
+                min-width: 60px;
+            }
+            
+            .main-content {
+                margin-top: 60px;
+                padding: 8px;
+            }
+            
+            .content-card {
+                padding: 12px;
+            }
+            
+            .page-title {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+            
+            p, li {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -370,7 +447,7 @@
     
     <!-- Header -->
     <header>
-        <div style="width: 30px;"></div>
+        <a href="https://alexie13.github.io/biogenius-academy/" class="home-button"><i class="fas fa-home"></i></a>
         <div class="logo">
             <svg width="40" height="40" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="45" fill="none" stroke="#00e6c0" stroke-width="2" />
@@ -382,7 +459,6 @@
             </svg>
             <h1>BIOGENIUS ACADEMY</h1>
         </div>
-        <div style="width: 30px;"></div>
     </header>
 
     <!-- Back Button -->
