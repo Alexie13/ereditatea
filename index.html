@@ -174,29 +174,7 @@
             text-align: center;
         }
 
-        .home-button {
-            position: fixed;
-            top: 80px;
-            left: 20px;
-            background-color: var(--primary-color);
-            color: var(--dark-color);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            z-index: 9;
-            transition: all 0.3s ease;
-        }
-
-        .home-button:hover {
-            transform: scale(1.1);
-            background-color: var(--secondary-color);
-        }
+        
 
         .home-icon {
             width: 24px;
@@ -240,13 +218,7 @@
                 font-size: 1.8rem;
             }
             
-            .home-button {
-                width: 40px;
-                height: 40px;
-                top: 70px;
-                left: 10px;
-            }
-            
+           
             .home-icon {
                 width: 20px;
                 height: 20px;
@@ -295,7 +267,15 @@
                 height: 25px;
             }
             
-            .home-button {
+            
+        /* Stiluri specifice acestei pagini */
+        .list-style {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            text-align: justify;
+            padding-left: 30px;
+        }
+.home-button {
             position: absolute;
             left: 20px;
             top: 50%;
@@ -320,7 +300,27 @@
             min-width: 100px;
             text-align: center;
         }
-
+             .home-button {
+                min-width: 60px;
+            }
+            
+              .home-button {
+                left: 5px;
+                min-width: 70px;
+                padding: 4px 8px;
+                font-size: 0.7rem;
+            }
+            
+            .home-button i {
+                font-size: 0.9rem;
+            }
+ .home-button {
+                left: 10px;
+                min-width: 90px;
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
+            
         .home-button:hover {
             transform: translateY(calc(-50% - 3px)) scale(1.05);
             box-shadow: 0 6px 20px rgba(0, 230, 192, 0.5);
@@ -332,40 +332,6 @@
 
         .home-button i {
             font-size: 1.1rem;
-        }
-
-            .home-button {
-                min-width: 60px;
-            }
-            
-            .main-content {
-                margin-top: 60px;
-                padding: 8px;
-            }
-            
-            .content-section {
-                padding: 12px;
-            }
-            
-            .page-title {
-                font-size: 1.4rem;
-            }
-            
-            .section-title {
-                font-size: 1.2rem;
-            }
-            
-            p, li {
-                font-size: 0.9rem;
-            }
-        }
-        
-        /* Stiluri specifice acestei pagini */
-        .list-style {
-            margin-bottom: 15px;
-            line-height: 1.6;
-            text-align: justify;
-            padding-left: 30px;
         }
 
         .list-item {
